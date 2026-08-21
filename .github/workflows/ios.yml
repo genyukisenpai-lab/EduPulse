@@ -1,0 +1,48 @@
+name: Build iOS IPA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'www/**'
+      - 'ios/**'
+      - 'scripts/build-web.js'
+      - '.github/workflows/ios.yml'
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build web assets
+        run: node scripts/build-web.js
+
+      - name: Sync Capacitor iOS
+        run: npx cap sync ios
+
+      - name: Archive (unsigned)
+        run: |
+          xcodebuild -workspace ios/App/App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath build/App.xcarchive \
+            archive CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""
+
+      - name: Package unsigned IPA
+        run: |
+          mkdir -p build/Payload
+          cp -R build/App.xcarchive/Products/Applications/*.app build/Payload/
+          cd build
+          zip -qry EduPulse-unsigned.ipa Payload
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: EduPulse-unsigned-ipa
+          path: build/EduPulse-unsigned.ipa
