@@ -31,12 +31,25 @@ jobs:
 
       - name: Archive (unsigned)
         run: |
+          set -o pipefail
           xcodebuild -project ios/App/App.xcodeproj \
             -scheme App \
             -configuration Release \
             -destination 'generic/platform=iOS' \
             -archivePath build/App.xcarchive \
-            archive CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""
+            archive CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" 2>&1 | tee build/xcodebuild.log
+
+      - name: Dump errors to summary
+        if: failure()
+        run: |
+          {
+            echo "### xcodebuild errors"
+            echo '```'
+            grep -E "error:|Error:|FAILED:|xcodebuild: error" build/xcodebuild.log | tail -40 || true
+            echo "--- tail ---"
+            tail -25 build/xcodebuild.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Package unsigned IPA
         run: |
