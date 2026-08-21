@@ -1,0 +1,14 @@
+{
+  "name": "edupulse-push-worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cloudflare Worker gửi nhắc ôn hằng ngày (Web Push) cho EduPulse",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

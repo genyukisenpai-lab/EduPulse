@@ -1,0 +1,429 @@
+{
+  "target": "http://localhost:3000",
+  "summary": {
+    "total": 67,
+    "pass": 65,
+    "fail": 0,
+    "warn": 1,
+    "skip": 0,
+    "blocked": 1
+  },
+  "results": [
+    {
+      "suite": "01-smoke",
+      "name": "Trang load không có JS exception",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "suite": "01-smoke",
+      "name": "Tiêu đề đúng",
+      "status": "PASS",
+      "detail": "EduPulse — Trợ lý Sĩ tử & Đếm ngược Kỳ thi"
+    },
+    {
+      "suite": "01-smoke",
+      "name": "Sidebar đủ 6 mục điều hướng",
+      "status": "PASS",
+      "detail": "count=6"
+    },
+    {
+      "suite": "01-smoke",
+      "name": "Hero countdown render",
+      "status": "PASS",
+      "detail": "\"Chưa chọn kỳ thi\""
+    },
+    {
+      "suite": "01-smoke",
+      "name": "Theme khởi tạo (auto)",
+      "status": "PASS",
+      "detail": "data-theme=light"
+    },
+    {
+      "suite": "01-smoke",
+      "name": "Chuyển tab Exams hiển thị",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "suite": "01-smoke",
+      "name": "Chuyển tab AI hiển thị",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "suite": "02-theme",
+      "name": "Chọn Tối -> data-theme=dark",
+      "status": "PASS",
+      "detail": "data-theme=dark"
+    },
+    {
+      "suite": "02-theme",
+      "name": "Chọn Sáng -> data-theme=light",
+      "status": "PASS",
+      "detail": "data-theme=light"
+    },
+    {
+      "suite": "02-theme",
+      "name": "Theme lưu sau reload",
+      "status": "PASS",
+      "detail": "data-theme=light"
+    },
+    {
+      "suite": "02-theme",
+      "name": "Toggle sidebar đổi theme (dark -> light)",
+      "status": "PASS",
+      "detail": "data-theme=light"
+    },
+    {
+      "suite": "03-exams",
+      "name": "Mở modal Thêm kỳ thi",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "suite": "03-exams",
+      "name": "Modal exam không trùng id",
+      "status": "PASS",
+      "detail": "count #exam-date=1"
+    },
+    {
+      "suite": "03-exams",
+      "name": "Thêm kỳ thi HSA thành công",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "suite": "03-exams",
+      "name": "Chặn ngày quá khứ khi thêm (min=hôm nay)",
+      "status": "PASS",
+      "detail": "min=2026-08-20 checkValidity=false"
+    },
+    {
+      "suite": "03-exams",
+      "name": "Filter THPT ẩn kỳ thi HSA",
+      "status": "PASS",
+      "detail": "count=0"
+    },
+    {
+      "suite": "03-exams",
+      "name": "Filter HSA/TSA hiện kỳ thi HSA",
+      "status": "PASS",
+      "detail": "count=1"
+    },
+    {
+      "suite": "03-exams",
+      "name": "Có nút lọc danh mục \"Kỳ thi khác\"",
+      "status": "PASS",
+      "detail": "số pill other=1"
+    },
+    {
+      "suite": "03-exams",
+      "name": "Đặt hero phản ánh lên trang chủ",
+      "status": "PASS",
+      "detail": "hero=\"Thi thử HSA lần 1\""
+    },
+    {
+      "suite": "03-exams",
+      "name": "Countdown days định dạng 3 số",
+      "status": "PASS",
+      "detail": "days=212"
+    },
+    {
+      "suite": "03-exams",
+      "name": "Sửa kỳ thi tương lai lưu được",
+      "status": "PASS",
+      "detail": "cards=\"(sửa)\"=1 modalStillOpen=0 title=\" Chỉnh Sửa Kỳ Thi\""
+    },
+    {
+      "suite": "03-exams",
+      "name": "Sửa kỳ thi QUÁ KHỨ lưu được",
+      "status": "PASS",
+      "detail": "submitFired=1 modalOpen=0 edited=1"
+    },
+    {
+      "suite": "03-exams",
+      "name": "Xóa kỳ thi (confirm modal)",
+      "status": "PASS",
+      "detail": "còn 3 thẻ"
+    },
+    {
+      "suite": "03-exams",
+      "name": "Tiêu đề XSS bị escape (không có <img> thực thi)",
+      "status": "PASS",
+      "detail": "\n        <div>\n          <div class=\"exam-card-top\">\n            <span class=\"exam-category-tag\">THPT Quốc Gia</span>\n  "
+    },
+    {
+      "suite": "04-home",
+      "name": "Chuỗi học hiển thị",
+      "status": "PASS",
+      "detail": "streak=1"
+    },
+    {
+      "suite": "04-home",
+      "name": "Hero không hiển thị kỳ thi đã qua",
+      "status": "PASS",
+      "detail": "{\"kicker\":\"KỲ THI TIẾP THEO\",\"title\":\"Kiểm tra giữa kỳ Toán\",\"days\":\"026\"}"
+    },
+    {
+      "suite": "04-home",
+      "name": "Lịch học hôm nay dựa trên kỳ thi tương lai",
+      "status": "PASS",
+      "detail": "{\"nearest\":\"Kiểm tra giữa kỳ Toán\",\"daysLeft\":26} isPast=false"
+    },
+    {
+      "suite": "04-home",
+      "name": "Lịch học hôm nay render (3 môn)",
+      "status": "PASS",
+      "detail": "count=3"
+    },
+    {
+      "suite": "04-home",
+      "name": "Các widget trang chủ tồn tại trong DOM",
+      "status": "PASS",
+      "detail": "thiếu: "
+    },
+    {
+      "suite": "05-study",
+      "name": "Ghi nhận nhật ký học tập",
+      "status": "PASS",
+      "detail": "rows=1"
+    },
+    {
+      "suite": "05-study",
+      "name": "Hôm nay cộng phút",
+      "status": "PASS",
+      "detail": "today=45p"
+    },
+    {
+      "suite": "05-study",
+      "name": "Chặn ghi nhật ký khi thiếu phút",
+      "status": "PASS",
+      "detail": "Lý rows=0"
+    },
+    {
+      "suite": "05-study",
+      "name": "Lưu mục tiêu -> progress cập nhật",
+      "status": "PASS",
+      "detail": "progress=8%"
+    },
+    {
+      "suite": "05-study",
+      "name": "Biểu đồ tuần được vẽ",
+      "status": "PASS",
+      "detail": "{\"exists\":true,\"pixels\":6159}"
+    },
+    {
+      "suite": "05-study",
+      "name": "Chia sẻ thành tích (tải ảnh PNG)",
+      "status": "PASS",
+      "detail": "edupulse-thanh-tich.png"
+    },
+    {
+      "suite": "06-widgets",
+      "name": "Modal widget không có ID trùng lặp",
+      "status": "PASS",
+      "detail": "#ws-greeting-title=1 #ws-greeting-sub=1 groups=5"
+    },
+    {
+      "suite": "06-widgets",
+      "name": "Có nút mở modal Tùy chỉnh trang chủ",
+      "status": "PASS",
+      "detail": "số nút=3 (app.js vẫn bind 3 nút này)"
+    },
+    {
+      "suite": "06-widgets",
+      "name": "Lưu lời chào -> áp dụng lên trang chủ",
+      "status": "PASS",
+      "detail": "home-greeting-title tồn tại=true mobile-greeting-name tồn tại=true (applyWidgetConfig set vào 2 id này)"
+    },
+    {
+      "suite": "06-widgets",
+      "name": "Các element đích của applyWidgetConfig tồn tại",
+      "status": "PASS",
+      "detail": "thiếu: "
+    },
+    {
+      "suite": "07-ai",
+      "name": "Subject chips render (9 môn)",
+      "status": "PASS",
+      "detail": "count=9"
+    },
+    {
+      "suite": "07-ai",
+      "name": "Gửi input rỗng không tạo tin",
+      "status": "PASS",
+      "detail": "1->1"
+    },
+    {
+      "suite": "07-ai",
+      "name": "AI trả lời được (thêm tin assistant)",
+      "status": "PASS",
+      "detail": "before=1 after=3 reply(120)=\"Mình chưa có kết nối Gemini. Kiểm tra API key hoặc server AI rồi thử lại nhé.\" status=\"\""
+    },
+    {
+      "suite": "07-ai",
+      "name": "Xóa lịch sử AI",
+      "status": "PASS",
+      "detail": "messages=3"
+    },
+    {
+      "suite": "08-chat",
+      "name": "Kết nối phòng chat (đọc trạng thái)",
+      "status": "PASS",
+      "detail": "\"Trực tuyến\""
+    },
+    {
+      "suite": "08-chat",
+      "name": "Khách gửi tin bị chặn + chuyển tab tài khoản",
+      "status": "PASS",
+      "detail": "toast=\"Vui lòng đăng nhập để tham gia chat cộng đồng.\" accountActive=1"
+    },
+    {
+      "suite": "08-chat",
+      "name": "Badge chat không hiện khi không có tin mới",
+      "status": "PASS",
+      "detail": "badge=\"\" (tổng tin trong phòng=0)"
+    },
+    {
+      "suite": "08-chat",
+      "name": "Attach input có accept đúng",
+      "status": "PASS",
+      "detail": "accept=\".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,image/*\""
+    },
+    {
+      "suite": "08-chat",
+      "name": "Có ô tên hiển thị",
+      "status": "PASS",
+      "detail": "count=1"
+    },
+    {
+      "suite": "09-library",
+      "name": "Thư viện rỗng hiển thị empty state",
+      "status": "PASS",
+      "detail": "empty=1"
+    },
+    {
+      "suite": "10-account",
+      "name": "Chuyển chế độ Đăng ký hiện ô tên",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "suite": "10-account",
+      "name": "Hiện/ẩn mật khẩu",
+      "status": "PASS",
+      "detail": "type=text"
+    },
+    {
+      "suite": "10-account",
+      "name": "Mở modal Quên mật khẩu",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "suite": "10-account",
+      "name": "Email không hợp lệ -> thông báo lỗi",
+      "status": "PASS",
+      "detail": "toast=\"Địa chỉ email không hợp lệ.\""
+    },
+    {
+      "suite": "10-account",
+      "name": "Mục bật/tắt push hiển thị (guest)",
+      "status": "PASS",
+      "detail": "push=true media=true"
+    },
+    {
+      "suite": "11-pwa",
+      "name": "Service worker kiểm soát trang",
+      "status": "PASS",
+      "detail": "controller=activated"
+    },
+    {
+      "suite": "11-pwa",
+      "name": "Manifest được khai báo",
+      "status": "PASS",
+      "detail": "manifest.webmanifest"
+    },
+    {
+      "suite": "11-pwa",
+      "name": "Offline: app shell load từ cache",
+      "status": "PASS",
+      "detail": "hero=1 banner=false"
+    },
+    {
+      "suite": "11-pwa",
+      "name": "Online: banner ngoại tuyến ẩn",
+      "status": "PASS",
+      "detail": "visible=false"
+    },
+    {
+      "suite": "12-push",
+      "name": "Mục nhắc ôn hằng ngày hiển thị",
+      "status": "PASS",
+      "detail": "visible=true"
+    },
+    {
+      "suite": "12-push",
+      "name": "Bật push khi chưa cấp quyền",
+      "status": "WARN",
+      "detail": "label=\"Đang tắt\" (trình duyệt tự chặn)"
+    },
+    {
+      "suite": "12-push",
+      "name": "4 khung giờ nhắc học",
+      "status": "PASS",
+      "detail": "count=4"
+    },
+    {
+      "suite": "13-security",
+      "name": "API key Gemini không lộ trong bundle công khai",
+      "status": "PASS",
+      "detail": "tìm thấy 0 key dạng AQ.* trong js/ai-config.js"
+    },
+    {
+      "suite": "13-security",
+      "name": "Guest load dữ liệu /api/state (dữ liệu chung server)",
+      "status": "PASS",
+      "detail": "khách nhận được 0 kỳ thi từ server: "
+    },
+    {
+      "suite": "14-authed",
+      "name": "Đăng nhập (chưa có tài khoản)",
+      "status": "BLOCKED",
+      "detail": "Set TEST_USER_EMAIL/TEST_USER_PASSWORD để test sync/chat/call/room"
+    },
+    {
+      "suite": "15-mobile",
+      "name": "Bottom nav hiện 7 mục",
+      "status": "PASS",
+      "detail": "count=7"
+    },
+    {
+      "suite": "15-mobile",
+      "name": "Mobile: chuyển tab AI",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "suite": "15-mobile",
+      "name": "Mobile: không tràn ngang",
+      "status": "PASS",
+      "detail": "overflow-x=0px"
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 400 ()",
+    "Auth error: FirebaseError: Firebase: The email address is badly formatted. (auth/invalid-email).\n    at B (https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js:1:23155)\n    at j (https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js:1:22410)\n    at se (https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js:1:28843)\n    at async ae (https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js:1:28975)\n    at async Mt (https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js:1:75867)\n    at async HTMLFormElement.handleEmailAuth (http://localhost:3000/js/app.js?v=76:1692:26)",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "[2026-08-20T00:32:02.454Z]  @firebase/firestore: Firestore (10.14.1): Could not reach Cloud Firestore backend. Connection failed 1 times. Most recent error: FirebaseError: [code=unavailable]: The operation could not be completed\nThis typically indicates that your device does not have a healthy Internet connection at the moment. The client will operate in offline mode until it is able to successfully connect to the backend.",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_INTERNET_DISCONNECTED",
+    "Failed to load resource: net::ERR_FAILED"
+  ],
+  "pageErrors": []
+}

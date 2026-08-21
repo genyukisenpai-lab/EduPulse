@@ -1,0 +1,9 @@
+data/
+node_modules/
+.env
+js/ai-config.js
+
+.firebase/
+push-worker/vapid-private.txt
+*.log
+session-*.md

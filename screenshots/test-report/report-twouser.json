@@ -1,0 +1,77 @@
+{
+  "target": "http://localhost:3000",
+  "results": [
+    {
+      "suite": "16-twouser",
+      "name": "Đăng nhập người dùng A",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "suite": "16-twouser",
+      "name": "Đăng nhập người dùng B",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "suite": "16-twouser",
+      "name": "Đồng bộ exam lên Firestore (A)",
+      "status": "PASS",
+      "detail": "{\"title\":\"E2E Sync 1787156811935\",\"date\":\"2027-12-31\"}"
+    },
+    {
+      "suite": "16-twouser",
+      "name": "B nhận được tin A gửi (realtime)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "suite": "16-twouser",
+      "name": "B thấy tên tác giả A",
+      "status": "PASS",
+      "detail": "author=\"fasaciv649@ittiv.com\""
+    },
+    {
+      "suite": "16-twouser",
+      "name": "A nhận được tin B trả lời (realtime)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "suite": "16-twouser",
+      "name": "B nhận thông báo cuộc gọi đến",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "suite": "16-twouser",
+      "name": "Cuộc gọi video ACTIVE (2 đầu)",
+      "status": "PASS",
+      "detail": "A=1 B=1"
+    },
+    {
+      "suite": "16-twouser",
+      "name": "Kết thúc cuộc gọi (cả 2 đầu ẩn overlay)",
+      "status": "PASS",
+      "detail": "A=0 B=0"
+    },
+    {
+      "suite": "16-twouser",
+      "name": "Phòng study hiển thị cho cả 2",
+      "status": "PASS",
+      "detail": "A=true B=true"
+    },
+    {
+      "suite": "16-twouser",
+      "name": "Phòng study đếm 2 thành viên",
+      "status": "PASS",
+      "detail": "A=2 B=2"
+    },
+    {
+      "suite": "16-twouser",
+      "name": "Rời phòng (cả 2 đầu ẩn overlay)",
+      "status": "PASS",
+      "detail": "A=0 B=0"
+    }
+  ]
+}

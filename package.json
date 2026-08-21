@@ -1,0 +1,20 @@
+{
+  "name": "edupulse-exam-countdown",
+  "version": "1.0.0",
+  "description": "EduPulse - Trợ lý Sĩ tử & Đếm ngược Kỳ thi",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "deploy": "firebase deploy --only hosting,firestore:rules"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@dataconnect/generated": "file:src/dataconnect-generated"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  }
+}

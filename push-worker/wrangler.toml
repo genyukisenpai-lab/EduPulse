@@ -1,0 +1,20 @@
+﻿name = "edupulse-push"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+# Táº¡o KV namespace trÆ°á»›c khi deploy:
+#   npx wrangler kv namespace create PUSH_SUBS
+# Rá»“i dÃ¡n ID vÃ o dÃ²ng dÆ°á»›i.
+[[kv_namespaces]]
+binding = "PUSH_SUBS"
+id = "d77d9cb3a7b74e12b60d528a10459f9e"
+
+# Cron:
+#   "* * * * *"   = mỗi phút: kiểm tra tin nhắn chat mới → gửi push
+#   "*/15 * * * *" = 15 phút/lần: nhắc ôn theo khung giờ mỗi người (06:30, 12:30, 18:00, 21:00 VN)
+[triggers]
+crons = ["* * * * *", "*/15 * * * *"]
+
+[vars]
+VAPID_PUBLIC = "BDxaiUJpVIq3GyRVhs8aYS4b1bhiJuU9ci9945I-vGV5QrVuktFyMEBZc3f7W4TgvGlBANe90T87hvm5fMPbtpM"
+FIRESTORE_PROJECT_ID = "tsa1-69053"

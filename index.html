@@ -1,0 +1,1003 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>EduPulse — Trợ lý Sĩ tử & Đếm ngược Kỳ thi</title>
+  <meta name="description" content="EduPulse — Đếm ngược kỳ thi THPTQG, HSA, TSA, HSG; quản lý lịch ôn thi, trợ lý AI và cộng đồng sĩ tử.">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="application-name" content="EduPulse">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="EduPulse">
+  <meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="icons/app-icon-192.png?v=cat-2026-01" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/app-icon-180.png?v=cat-2026-01">
+  <!-- iOS launch screen (splash) — portrait iPhone -->
+  <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="icons/splash/apple-splash-640x1136.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" href="icons/splash/apple-splash-750x1334.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" href="icons/splash/apple-splash-828x1792.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" href="icons/splash/apple-splash-1125x2436.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" href="icons/splash/apple-splash-1242x2688.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" href="icons/splash/apple-splash-1170x2532.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3)" href="icons/splash/apple-splash-1284x2778.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)" href="icons/splash/apple-splash-1179x2556.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3)" href="icons/splash/apple-splash-1290x2796.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 402px) and (device-height: 874px) and (-webkit-device-pixel-ratio: 3)" href="icons/splash/apple-splash-1206x2622.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 440px) and (device-height: 956px) and (-webkit-device-pixel-ratio: 3)" href="icons/splash/apple-splash-1320x2868.png">
+  <!-- iPad (portrait + landscape) -->
+  <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" href="icons/splash/apple-splash-1536x2048.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" href="icons/splash/apple-splash-1668x2224.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" href="icons/splash/apple-splash-1668x2388.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" href="icons/splash/apple-splash-2048x2732.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" href="icons/splash/apple-splash-2732x2048.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" href="icons/splash/apple-splash-2224x1668.png">
+  
+<!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Noto+Sans+Math&family=Noto+Sans+Symbols+2&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Noto+Sans+Math&family=Noto+Sans+Symbols+2&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 Icons -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- KaTeX CSS được tải lazy khi AI trả lời có công thức (js/app.js → ensureKatex) -->
+  
+  <link rel="preconnect" href="https://generativelanguage.googleapis.com">
+  
+  <!-- App Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=74">
+  <link rel="stylesheet" href="css/ios-pwa.css?v=16">
+</head>
+<body>
+  <div class="app-layout">
+    
+    <!-- DESKTOP SIDEBAR -->
+    <aside class="app-sidebar" aria-label="Main Navigation">
+      <div class="sidebar-top">
+        <!-- Logo -->
+        <div class="sidebar-logo">
+          <div class="sidebar-brand-name">
+            <i class="fa-solid fa-graduation-cap"></i> EduPulse
+          </div>
+          <span class="sidebar-brand-slogan">Study Smarter</span>
+        </div>
+
+<!-- Navigation Links -->
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-tab="tab-home">
+            <i class="fa-solid fa-house"></i>
+            <span>Trang chủ</span>
+          </button>
+          <button class="nav-item" data-tab="tab-exams">
+            <i class="fa-solid fa-bullseye"></i>
+            <span>Kỳ thi</span>
+          </button>
+          <button class="nav-item" data-tab="tab-ai">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>AI ôn thi</span>
+          </button>
+          <button class="nav-item" data-tab="tab-chat">
+            <i class="fa-solid fa-users"></i>
+            <span>Cộng đồng</span>
+          </button>
+          <button class="nav-item" data-tab="tab-groups">
+            <i class="fa-solid fa-people-group"></i>
+            <span>Học nhóm</span>
+          </button>
+          <button class="nav-item" data-tab="tab-account">
+            <i class="fa-solid fa-user"></i>
+            <span>Tài khoản</span>
+          </button>
+
+          <div class="sidebar-nav-secondary">
+            <button class="nav-item" data-tab="tab-library">
+              <i class="fa-solid fa-folder-open"></i>
+              <span>Tài liệu</span>
+            </button>
+            <button class="nav-item" data-tab="tab-stats">
+              <i class="fa-solid fa-chart-simple"></i>
+              <span>Thống kê</span>
+            </button>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Sidebar Bottom: Account Block -->
+      <div class="sidebar-bottom">
+        <div class="sidebar-account-label">TÀI KHOẢN</div>
+        <button class="sidebar-user-card" id="btn-sidebar-account" data-tab="tab-account" title="Quản lý tài khoản">
+          <div class="sidebar-avatar" id="sidebar-user-avatar">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="sidebar-user-meta">
+            <span class="sidebar-user-name" id="sidebar-user-name">Sĩ tử EduPulse</span>
+            <span class="sidebar-user-role" id="sidebar-user-status">Lưu trữ máy</span>
+          </div>
+        </button>
+
+        <!-- Dark Mode Toggle -->
+        <button class="btn-theme-toggle" id="btn-sidebar-theme" title="Chuyển giao diện Sáng/Tối" type="button">
+          <i class="fa-solid fa-moon" id="sidebar-theme-icon"></i>
+          <span id="sidebar-theme-label">Giao diện tối</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN VIEWPORT -->
+    <main class="app-main-viewport">
+      <!-- Chỉ báo ngoại tuyến (offline-first) -->
+      <div class="offline-banner" id="offline-banner" hidden>
+        <i class="fa-solid fa-wifi"></i> Đang ngoại tuyến — vẫn xem được kỳ thi, tài liệu & nhật ký. Dữ liệu sẽ đồng bộ khi có mạng.
+      </div>
+
+<!-- MOBILE TOP HEADER — removed, using bottom tab bar only -->
+
+<!-- ================= TAB 1: TRANG CHỦ (FIGMA DASHBOARD) ================= -->
+      <section id="tab-home" class="tab-content active">
+
+        <!-- HERO COUNTDOWN CARD (MIDNIGHT NAVY) -->
+        <div class="hero-countdown-card" id="hero-countdown-box">
+          <div class="hero-left-info">
+            <h2 class="hero-exam-title" id="hero-exam-title">Chưa chọn kỳ thi</h2>
+            <div class="hero-exam-meta" id="hero-exam-date">
+              <i class="fa-regular fa-calendar-days"></i> 25.06.2027 • 07:30
+            </div>
+          </div>
+
+          <div class="hero-right-action">
+            <div class="hero-timer-display">
+              <div class="timer-unit-item">
+                <span class="timer-unit-num" id="hero-days">000</span>
+                <span class="timer-unit-lbl">NGÀY</span>
+              </div>
+              <div class="timer-unit-item">
+                <span class="timer-unit-num" id="hero-hours">00</span>
+                <span class="timer-unit-lbl">GIỜ</span>
+              </div>
+              <div class="timer-unit-item">
+                <span class="timer-unit-num" id="hero-minutes">00</span>
+                <span class="timer-unit-lbl">PHÚT</span>
+              </div>
+              <div class="timer-unit-item">
+                <span class="timer-unit-num" id="hero-seconds">00</span>
+                <span class="timer-unit-lbl">GIÂY</span>
+              </div>
+            </div>
+
+            <button class="btn-hero-detail" id="btn-hero-detail">Xem chi tiết</button>
+          </div>
+        </div>
+        <div class="skeleton hero-skeleton"></div>
+
+        <!-- CHUỖI HỌC -->
+        <div class="account-streak-card" id="home-streak-card">
+          <div class="account-streak-icon"><i class="fa-solid fa-fire"></i></div>
+          <div class="account-streak-info">
+            <div class="account-streak-value" id="home-streak-value">--</div>
+            <div class="account-streak-label">Ngày học liên tiếp</div>
+            <div class="account-streak-sub" id="home-streak-record">Kỷ lục: --</div>
+          </div>
+        </div>
+
+        <!-- HÀNG THỂ THỐNG KÊ NHANH (widget: hiện/ẩn qua Tùy chỉnh trang chủ) -->
+        <div class="stats-overview-grid" id="home-stats-grid">
+          <div class="stat-box-card">
+            <div class="stat-box-label" id="home-stat-target-label">Mục tiêu tuần</div>
+            <div class="stat-box-value" id="home-stat-target">--</div>
+            <div class="stat-box-sub" id="home-stat-target-sub">Chưa có kỳ thi nào</div>
+          </div>
+          <div class="stat-box-card">
+            <div class="stat-box-label" id="home-stat-nearest-label">Kỳ thi gần nhất</div>
+            <div class="stat-box-value" id="home-stat-nearest">--</div>
+            <div class="stat-box-sub" id="home-stat-nearest-sub">Kỳ thi kế tiếp</div>
+          </div>
+          <div class="stat-box-card">
+            <div class="stat-box-label" id="home-stat-streak-label">Chuỗi học</div>
+            <div class="stat-box-value" id="home-stat-streak">--</div>
+            <div class="stat-box-sub" id="home-stat-streak-sub">Kỷ lục cá nhân</div>
+          </div>
+        </div>
+
+        <!-- KỲ THI CỦA BẠN -->
+        <div class="dashboard-panel-card" id="home-exams-panel">
+          <div class="panel-header-row">
+            <h3 class="panel-title" id="home-panel-exams-title">Kỳ thi của bạn</h3>
+            <button class="btn-pill-add" id="btn-home-add-exam"><i class="fa-solid fa-plus"></i> Thêm</button>
+          </div>
+          <div class="exam-mini-list" id="home-exam-list"></div>
+        </div>
+
+        <!-- LỊCH HỌC HÔM NAY (động) -->
+        <div class="home-schedule-card">
+          <div class="home-schedule-head">
+            <span><i class="fa-solid fa-bolt"></i> Lịch học hôm nay</span>
+            <button class="btn-card-icon" data-tab="tab-stats" title="Xem chi tiết"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+          <div id="home-schedule-list"><div class="empty-note">Đang tính lịch học…</div></div>
+        </div>
+
+      </section>
+
+      <!-- ================= TAB 2: QUẢN LÝ KỲ THI (FULL EXAM GRID) ================= -->
+      <section id="tab-exams" class="tab-content">
+        <div class="exams-full-page">
+          <div class="filter-bar-header">
+            <div>
+              <h2 class="greeting-title">Tất cả Kỳ thi</h2>
+              <p class="greeting-sub">Quản lý mục tiêu và thiết lập kỳ thi trọng điểm</p>
+            </div>
+
+            <div class="exam-toolbar-actions">
+              <div class="filter-pills-group">
+                <button class="filter-pill-btn active" data-exam-filter="all">Tất cả</button>
+                <button class="filter-pill-btn" data-exam-filter="thpt">THPT Quốc Gia</button>
+                <button class="filter-pill-btn" data-exam-filter="hsa">HSA / TSA</button>
+                <button class="filter-pill-btn" data-exam-filter="hsg">Học Sinh Giỏi</button>
+                <button class="filter-pill-btn" data-exam-filter="school">Giữa/Cuối kỳ</button>
+                <button class="filter-pill-btn" data-exam-filter="other">Kỳ thi khác</button>
+              </div>
+
+              <button class="btn-primary-action" id="btn-add-exam-page">
+                <i class="fa-solid fa-plus"></i> Thêm kỳ thi
+              </button>
+            </div>
+          </div>
+
+          <div class="exams-cards-grid" id="exam-grid">
+            <div class="skeleton exam-card-skeleton"></div>
+            <div class="skeleton exam-card-skeleton"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 3: TRỢ LÝ AI ================= -->
+      <section id="tab-ai" class="tab-content">
+        <div class="ai-page">
+          <div class="home-greeting-row">
+            <div class="header-greeting-wrap">
+              <h1 class="greeting-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Trợ lý AI</h1>
+              <p class="greeting-sub">Hỏi bất cứ điều gì về việc ôn thi — giải bài, lập kế hoạch, vẽ sơ đồ.</p>
+            </div>
+            <button type="button" class="btn-icon-round ai-clear-history" id="ai-clear-history" title="Xóa lịch sử trò chuyện"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+
+          <div class="ai-workspace">
+            <div class="ai-chat" id="ai-messages" aria-live="polite">
+              <article class="ai-message assistant">
+                <div class="ai-message-avatar"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <div class="ai-message-content"><strong>Chào bạn!</strong><p>Mình có thể lập kế hoạch ôn, giải bài tập và gợi ý cách học hiệu quả. Hãy đặt câu hỏi bất kỳ nhé.</p></div>
+              </article>
+            </div>
+
+            <div class="ai-weak-subjects" id="ai-weak-subjects" hidden></div>
+            <div class="ai-status-line" id="ai-status-line" hidden><i class="fa-solid fa-circle-info"></i> <span id="ai-provider-status"></span></div>
+
+            <form class="ai-composer" id="ai-form">
+              <button type="button" class="ai-web-toggle" id="ai-web-toggle" title="Tra cứu web khi trả lời (theo thời gian thực)"><i class="fa-solid fa-globe"></i></button>
+              <input id="ai-input" maxlength="300" autocomplete="off" placeholder="Hỏi mình bất cứ điều gì…">
+              <select id="ai-model-select" class="ai-model-select" title="Chọn nhà cung cấp AI">
+                <option value="auto">⚖️ Tự động</option>
+                <option value="groq">⚡ Groq</option>
+                <option value="gemini">🤖 Gemini</option>
+              </select>
+              <button type="submit" aria-label="Gửi cho trợ lý AI"><i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 4: PHÒNG CHAT CỘNG ĐỒNG ================= -->
+      <section id="tab-chat" class="tab-content">
+        <div class="chat-page-shell">
+          <aside class="chat-sidebar-panel">
+            <span class="chat-room-badge">PHÒNG CỘNG ĐỒNG</span>
+<div class="chat-channel-box">
+              <div class="chat-channel-title"><i class="fa-solid fa-hashtag"></i> phòng-chung</div>
+              <div class="chat-channel-sub">Kênh thảo luận sĩ tử toàn quốc</div>
+            </div>
+
+            <div class="chat-room-panel">
+              <div class="chat-room-panel-title"><i class="fa-solid fa-headset"></i> Phòng ôn thi trực tiếp</div>
+              <div class="chat-room-members" id="room-member-list">
+                <span class="chat-room-empty">Chưa có ai trong phòng.</span>
+              </div>
+              <div class="chat-room-actions">
+                <button type="button" class="btn-room-join" id="btn-room-join-voice"><i class="fa-solid fa-microphone"></i> Vào phòng thoại</button>
+                <button type="button" class="btn-room-join" id="btn-room-join-video"><i class="fa-solid fa-video"></i> Vào phòng video</button>
+              </div>
+              <p class="chat-room-note">Phòng dùng WebRTC peer-to-peer — miễn phí, không phát sinh chi phí. Video hỗ trợ ~4–6 người, chỉ thoại ~8–10 người.</p>
+            </div>
+            
+            <div style="margin-top: auto;">
+              <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 6px;" for="chat-display-name">Tên hiển thị:</label>
+              <input id="chat-display-name" class="form-input-control" maxlength="32" placeholder="Ví dụ: Minh - 2k7">
+            </div>
+          </aside>
+
+          <div class="chat-main-panel">
+<div class="chat-header-bar">
+              <div class="chat-header-title"># phòng-chung</div>
+              <div class="chat-status-indicator" id="chat-connection">Đang kết nối phòng chat…</div>
+            </div>
+
+            <div class="chat-room-bar-m" id="chat-room-bar-m">
+              <div class="chat-room-bar-info">
+                <span class="chat-room-bar-title"><i class="fa-solid fa-headset"></i> Phòng ôn thi trực tiếp</span>
+                <span class="chat-room-bar-count" id="room-member-count-m">Chưa có ai trong phòng</span>
+              </div>
+              <div class="chat-room-bar-btns">
+                <button type="button" class="btn-room-join" id="btn-room-join-voice-m"><i class="fa-solid fa-microphone"></i> Thoại</button>
+                <button type="button" class="btn-room-join" id="btn-room-join-video-m"><i class="fa-solid fa-video"></i> Video</button>
+              </div>
+            </div>
+
+            <div class="chat-messages-container" id="chat-messages" aria-live="polite">
+              <!-- Chat messages injected by JS -->
+            </div>
+
+            <form class="chat-composer-bar" id="chat-form">
+              <input id="chat-message" class="chat-composer-input" maxlength="500" autocomplete="off" placeholder="Nhắn gì đó tích cực với mọi người…">
+              <input id="chat-file-input" type="file" hidden accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,image/*">
+              <button class="btn-chat-attach" id="btn-chat-attach" type="button" aria-label="Tải tài liệu lên" title="Tải tài liệu lên">
+                <i class="fa-solid fa-paperclip"></i>
+              </button>
+              <button class="btn-chat-send" id="btn-chat-send" type="submit" aria-label="Gửi tin nhắn">
+                <i class="fa-solid fa-paper-plane"></i> Gửi
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 4b: HỌC NHÓM (STUDY GROUP) ================= -->
+      <section id="tab-groups" class="tab-content">
+        <div class="groups-page">
+          <div id="groups-root"></div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 4: THƯ VIỆN TÀI LIỆU ================= -->
+<section id="tab-library" class="tab-content">
+        <div class="library-page">
+          <div class="header-greeting-wrap">
+            <h1 class="greeting-title">Tài liệu của tôi</h1>
+            <p class="greeting-sub">Lưu tài liệu từ cộng đồng để xem lại bất cứ lúc nào.</p>
+          </div>
+          <div class="library-grid" id="library-list">
+            <div class="skeleton library-skeleton"></div>
+            <div class="skeleton library-skeleton"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 5: THỐNG KÊ & HỌC TẬP THÔNG MINH ================= -->
+      <section id="tab-stats" class="tab-content">
+        <div class="stats-page">
+          <div class="header-greeting-wrap">
+            <h1 class="greeting-title">Học tập thông minh</h1>
+            <p class="greeting-sub">Ghi nhận thời gian học, nhận lịch học động và xem dự báo tiến độ.</p>
+          </div>
+
+          <!-- MỤC TIÊU -->
+          <div class="stats-card">
+            <div class="stats-card-title"><i class="fa-solid fa-bullseye"></i> Mục tiêu ôn tập</div>
+            <div class="goals-grid">
+              <div class="form-group-item">
+                <label for="goal-score">Điểm số mục tiêu:</label>
+                <input id="goal-score" class="form-input-control" type="number" step="0.25" min="1" max="10" placeholder="VD: 8.5">
+              </div>
+              <div class="form-group-item">
+                <label for="goal-subject">Môn trọng tâm:</label>
+                <select id="goal-subject" class="form-input-control"></select>
+              </div>
+              <div class="form-group-item">
+                <label for="goal-weekly">Mục tiêu phút/tuần:</label>
+                <input id="goal-weekly" class="form-input-control" type="number" min="30" step="30" placeholder="300">
+              </div>
+            </div>
+            <button class="btn-primary-action" id="btn-save-goals"><i class="fa-solid fa-check"></i> Lưu mục tiêu</button>
+          </div>
+
+          <!-- NHẬT KÝ HỌC TẬP -->
+          <div class="stats-card">
+            <div class="stats-card-title"><i class="fa-solid fa-pen-to-square"></i> Nhật ký học tập</div>
+            <div class="log-add-row">
+              <select id="log-subject" class="form-input-control" aria-label="Môn học"></select>
+              <input id="log-minutes" class="form-input-control" type="number" min="1" step="5" placeholder="Phút">
+              <input id="log-note" class="form-input-control" type="text" placeholder="Ghi chú (tùy chọn)">
+              <button class="btn-primary-action" id="btn-log-study"><i class="fa-solid fa-plus"></i> Ghi nhận</button>
+            </div>
+            <div class="stats-mini-grid">
+              <div class="stats-mini-box"><span class="stats-mini-num" id="stats-today-minutes">0p</span><span class="stats-mini-label">Hôm nay</span></div>
+              <div class="stats-mini-box"><span class="stats-mini-num" id="stats-week-minutes">0p</span><span class="stats-mini-label">7 ngày</span></div>
+              <div class="stats-mini-box"><span class="stats-mini-num" id="stats-streak">0</span><span class="stats-mini-label">Chuỗi ngày</span></div>
+              <div class="stats-mini-box"><span class="stats-mini-num" id="stats-goal-progress">0%</span><span class="stats-mini-label">Tiến độ tuần</span></div>
+            </div>
+            <div class="stats-log-list" id="stats-log-list"></div>
+          </div>
+
+          <!-- AI DIAGNOSTIC: PHÂN TÍCH ĐIỂM YẾU -->
+          <div class="stats-card">
+            <div class="stats-card-title"><i class="fa-solid fa-user-doctor"></i> AI Diagnostic · Phân tích điểm yếu</div>
+            <p class="stats-card-note">AI đọc nhật ký học tập của bạn, đối chiếu với môn yếu và lịch thi để gợi ý cách phân bổ lại thời gian hợp lý hơn.</p>
+            <div class="forecast-actions">
+              <button class="btn-primary-action" id="btn-ai-diagnostic"><i class="fa-solid fa-wand-magic-sparkles"></i> Phân tích ngay</button>
+            </div>
+          </div>
+
+          <!-- LỊCH HỌC HÔM NAY -->
+          <div class="stats-card">
+            <div class="stats-card-title"><i class="fa-solid fa-calendar-day"></i> Lịch học hôm nay</div>
+            <p class="stats-card-note" id="stats-schedule-note"></p>
+            <div id="stats-schedule-list"></div>
+          </div>
+
+          <!-- BIỂU ĐỒ -->
+          <div class="stats-card">
+            <div class="stats-card-title"><i class="fa-solid fa-chart-column"></i> Phân tích 7 ngày qua</div>
+            <div class="chart-grid">
+              <div class="chart-box">
+                <div class="chart-label">Thời gian mỗi ngày</div>
+                <canvas id="chart-weekly" width="320" height="160"></canvas>
+              </div>
+              <div class="chart-box">
+                <div class="chart-label">Phân bổ theo môn</div>
+                <canvas id="chart-subjects" width="160" height="160"></canvas>
+              </div>
+              <div class="chart-box chart-box-wide">
+                <div class="chart-label">Lũy kế vs mục tiêu tuần</div>
+                <canvas id="chart-forecast" width="320" height="140"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- DỰ BÁO -->
+          <div class="stats-card">
+            <div class="stats-card-title"><i class="fa-solid fa-chart-line"></i> Dự báo mức độ hoàn thành</div>
+            <div class="forecast-status" id="stats-goal-status">Chưa có dữ liệu.</div>
+            <div class="forecast-actions">
+              <button class="btn-primary-action" id="btn-share-card"><i class="fa-solid fa-share-nodes"></i> Chia sẻ thành tích</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TAB 6: TÀI KHOẢN & ĐỒNG BỘ ================= -->
+      <section id="tab-account" class="tab-content">
+        <div class="account-wrapper">
+          <div class="account-card-main">
+            
+            <!-- GUEST / AUTH FORM -->
+            <div id="account-guest-view">
+              <div class="account-auth-toggle">
+                <button type="button" class="auth-mode-btn active" id="btn-tab-login">Đăng nhập</button>
+                <button type="button" class="auth-mode-btn" id="btn-tab-register">Đăng ký</button>
+              </div>
+
+              <h3 id="auth-form-title" style="font-family: var(--font-heading); font-size: 1.35rem; font-weight: 700; margin-bottom: 4px;">Đăng nhập tài khoản</h3>
+              <p id="auth-form-subtitle" style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">Đồng bộ dữ liệu đếm ngược trên mọi thiết bị.</p>
+
+              <!-- Google Auth Button -->
+              <button class="btn-google-auth-wide" id="btn-google-auth" type="button">
+                <svg viewBox="0 0 48 48" width="18" height="18">
+                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                </svg>
+                <span>Tiếp tục với Google</span>
+              </button>
+
+              <div class="auth-divider-line">
+                <span>hoặc dùng Email & Mật khẩu</span>
+              </div>
+
+              <form id="auth-form" novalidate>
+                <div class="form-group-item" id="auth-name-group" hidden>
+                  <label for="auth-name">Tên hiển thị sĩ tử:</label>
+                  <input id="auth-name" class="form-input-control" type="text" placeholder="Ví dụ: Minh - THPT Chuyên">
+                </div>
+
+                <div class="form-group-item">
+                  <label for="auth-email">Địa chỉ Email:</label>
+                  <input id="auth-email" class="form-input-control" type="email" required placeholder="name@example.com">
+                </div>
+
+                <div class="form-group-item">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <label for="auth-password" style="margin: 0;">Mật khẩu:</label>
+                    <button type="button" id="btn-forgot-password" style="background: none; border: none; font-size: 0.8rem; color: var(--primary); font-weight: 500; cursor: pointer;">Quên mật khẩu?</button>
+                  </div>
+                  <div style="position: relative;">
+                    <input id="auth-password" class="form-input-control" type="password" required minlength="6" placeholder="Tối thiểu 6 ký tự">
+                    <button type="button" id="btn-toggle-password" aria-label="Hiện/ẩn mật khẩu" title="Hiện/ẩn mật khẩu" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-dim); cursor: pointer;"><i class="fa-solid fa-eye"></i></button>
+                  </div>
+                </div>
+
+                <button class="btn-primary-block" id="auth-submit" type="submit">
+                  <span>Đăng nhập</span>
+                </button>
+              </form>
+            </div>
+
+<!-- LOGGED-IN / USER PROFILE VIEW -->
+            <div id="account-user-view" hidden>
+              <div class="profile-view-header">
+                <div class="profile-avatar-large" id="account-avatar-user">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="profile-meta-wrap">
+                  <h3 class="profile-name-lg" id="account-user-name">Sĩ tử EduPulse</h3>
+                  <p class="profile-email-sub" id="account-user-email">email@example.com</p>
+                  <span id="badge-email-verified" style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.78rem; color: var(--success); font-weight: 600; margin-top: 4px;">
+                    <i class="fa-solid fa-circle-check"></i> Đã xác minh email
+                  </span>
+                  <button type="button" id="btn-send-verification" class="btn-secondary-flat" style="margin-top: 6px; padding: 6px 12px; font-size: 0.8rem;">
+                    <i class="fa-solid fa-envelope-circle-check"></i> Gửi email xác thực
+                  </button>
+                </div>
+              </div>
+
+              <!-- Chuỗi học -->
+              <div class="account-streak-card">
+                <div class="account-streak-icon"><i class="fa-solid fa-fire"></i></div>
+                <div class="account-streak-info">
+                  <div class="account-streak-value" id="acc-streak-value">--</div>
+                  <div class="account-streak-label">Ngày học liên tiếp</div>
+                  <div class="account-streak-sub" id="acc-streak-record">Kỷ lục: --</div>
+                </div>
+              </div>
+
+              <!-- Đếm ngược kỳ thi -->
+              <div class="account-countdown-card" id="acc-countdown-card">
+                <div class="account-countdown-head">
+                  <span class="account-countdown-kicker">KỲ THI TIẾP THEO</span>
+                  <span class="account-countdown-empty" id="acc-countdown-empty" hidden>Chưa có kỳ thi nào</span>
+                </div>
+                <div class="account-countdown-title" id="acc-countdown-title">--</div>
+                <div class="account-countdown-meta" id="acc-countdown-date"><i class="fa-regular fa-calendar-days"></i> --</div>
+                <div class="account-countdown-timer" id="acc-countdown-timer">
+                  <div class="acc-timer-unit">
+                    <span class="acc-timer-num" id="acc-cd-days">--</span>
+                    <span class="acc-timer-lbl">NGÀY</span>
+                  </div>
+                  <div class="acc-timer-unit">
+                    <span class="acc-timer-num" id="acc-cd-hours">--</span>
+                    <span class="acc-timer-lbl">GIỜ</span>
+                  </div>
+                  <div class="acc-timer-unit">
+                    <span class="acc-timer-num" id="acc-cd-minutes">--</span>
+                    <span class="acc-timer-lbl">PHÚT</span>
+                  </div>
+                  <div class="acc-timer-unit">
+                    <span class="acc-timer-num" id="acc-cd-seconds">--</span>
+                    <span class="acc-timer-lbl">GIÂY</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Group: Thoát -->
+              <div class="account-group">
+                <div class="account-group-list">
+                  <button type="button" class="account-action-row-btn danger" id="btn-account-logout">
+                    <span><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- PUSH NOTIFICATION TOGGLE (hiển thị cho mọi người, kể cả guest) -->
+            <div class="account-group" id="push-toggle-section" hidden>
+              <div class="account-group-title">Thông báo</div>
+              <div class="account-group-list">
+                <button type="button" class="account-action-row-btn" id="btn-toggle-push">
+                  <span><i class="fa-solid fa-bell"></i> Nhắc ôn hằng ngày
+                    <span class="account-row-sub" id="push-status-label">Đang tắt</span>
+                  </span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
+              <p class="account-group-note">Mỗi ngày 18:00 nhận thông báo "Còn N ngày tới kỳ thi" trên thiết bị này — không cần đăng nhập. (iPhone: cần cài app vào Màn hình chính, iOS 16.4+.)</p>
+            </div>
+
+            <!-- TÀI LIỆU (truy cập từ Tài khoản trên mobile — nút nav Tài liệu ẩn trên iOS) -->
+            <div class="account-group">
+              <div class="account-group-title">Học tập</div>
+              <div class="account-group-list">
+                <button type="button" class="account-action-row-btn" data-tab="tab-stats">
+                  <span><i class="fa-solid fa-chart-simple"></i> Thống kê & nhật ký học
+                    <span class="account-row-sub">Tiến độ ôn thi, lịch học & biểu đồ</span>
+                  </span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <button type="button" class="account-action-row-btn" id="btn-open-library-account" data-tab="tab-library">
+                  <span><i class="fa-solid fa-folder-open"></i> Tài liệu của tôi
+                    <span class="account-row-sub">Đề thi, tài liệu & bài giảng đã lưu</span>
+                  </span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- QUYỀN CAMERA & MICRO (xin 1 lần, sau đó tự kết nối) -->
+            <div class="account-group" id="media-toggle-section" hidden>
+              <div class="account-group-title">Gọi điện</div>
+              <div class="account-group-list">
+                <button type="button" class="account-action-row-btn" id="btn-toggle-media">
+                  <span><i class="fa-solid fa-video"></i> Camera & micro
+                    <span class="account-row-sub" id="media-status-label">Đang kiểm tra…</span>
+                  </span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
+              <p class="account-group-note">Chỉ hỏi quyền <b>1 lần</b>. Sau khi bật, mọi cuộc gọi tự kết nối ngay, không hỏi lại. (Nếu xóa & cài lại app phải bật lại.)</p>
+            </div>
+
+            <!-- GIAO DIỆN: Tự động theo hệ thống -->
+            <div class="account-group">
+              <div class="account-group-title">Giao diện</div>
+              <div class="theme-segmented">
+                <button type="button" class="theme-seg-btn" data-theme-pref="auto"><i class="fa-solid fa-display"></i> Hệ thống</button>
+                <button type="button" class="theme-seg-btn" data-theme-pref="light"><i class="fa-solid fa-sun"></i> Sáng</button>
+                <button type="button" class="theme-seg-btn" data-theme-pref="dark"><i class="fa-solid fa-moon"></i> Tối</button>
+              </div>
+              <p class="account-group-note">Chọn "Hệ thống" để app tự đổi sáng/tối theo cài đặt trên điện thoại.</p>
+            </div>
+
+            <!-- TÙY CHỈNH TRANG CHỦ (hiển thị cho mọi người, kể cả guest) -->
+            <div class="account-group">
+              <div class="account-group-title">Trang chủ</div>
+              <div class="account-group-list">
+                <button type="button" class="account-action-row-btn" id="btn-open-widget-settings-account">
+                  <span><i class="fa-solid fa-sliders"></i> Tùy chỉnh trang chủ</span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </button>
+              </div>
+              <p class="account-group-note">Sửa lời chào, bật/tắt khu vực và nội dung mọi widget trên trang chủ.</p>
+            </div>
+
+            <!-- NHẮC HỌC THÔNG MINH -->
+            <div class="account-group" id="smart-push-section">
+              <div class="account-group-title">Nhắc học thông minh</div>
+              <div class="push-times-grid">
+                <label class="push-time-item"><input type="checkbox" class="push-time-cb" value="06:30" aria-label="Nhắc lúc 06:30"> <span>06:30 <small>động lực sáng</small></span></label>
+                <label class="push-time-item"><input type="checkbox" class="push-time-cb" value="12:30" aria-label="Nhắc lúc 12:30"> <span>12:30 <small>nạp năng lượng</small></span></label>
+                <label class="push-time-item"><input type="checkbox" class="push-time-cb" value="18:00" aria-label="Nhắc lúc 18:00"> <span>18:00 <small>nhắc ôn tối</small></span></label>
+                <label class="push-time-item"><input type="checkbox" class="push-time-cb" value="21:00" aria-label="Nhắc lúc 21:00"> <span>21:00 <small>ôn lại bài</small></span></label>
+              </div>
+              <label class="push-quote-row">
+                <input type="checkbox" id="push-quote" aria-label="Gửi câu nói truyền động lực lúc 06:30"> <span>Gửi câu nói truyền động lực lúc 06:30</span>
+              </label>
+              <button class="btn-primary-action" id="btn-save-push"><i class="fa-solid fa-floppy-disk"></i> Lưu cài đặt nhắc</button>
+              <p class="account-group-note">Nhận thông báo "Còn N ngày tới kỳ thi" đúng khung giờ sinh học bạn chọn — chạy trên server, kể cả khi app đóng. (iPhone: cần cài app vào Màn hình chính.)</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modal-ai-report">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-user-doctor"></i> AI Diagnostic · Phân tích điểm yếu</h3>
+        <button class="btn-close-modal" data-close="modal-ai-report" aria-label="Đóng" title="Đóng">&times;</button>
+      </div>
+      <div class="modal-body-content">
+        <pre class="ai-report-panel" id="ai-report-content">Đang tạo báo cáo…</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Tùy chỉnh trang chủ (nội dung mọi widget) -->
+  <div class="modal-backdrop" id="modal-widget-settings">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-sliders"></i> Tùy chỉnh trang chủ</h3>
+        <button class="btn-close-modal" data-close="modal-widget-settings" aria-label="Đóng" title="Đóng">&times;</button>
+      </div>
+      <div class="modal-body-content widget-settings-body">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">Sửa nội dung mọi widget trên trang chủ. Thay đổi được đồng bộ qua tài khoản của bạn (nếu đã đăng nhập).</p>
+
+        <!-- Lời chào -->
+        <div class="widget-setting-group">
+          <div class="widget-setting-title">Lời chào</div>
+          <label class="ws-field"><span>Tiêu đề</span><input id="ws-greeting-title" class="form-input-control" type="text" maxlength="60" placeholder="Ví dụ: Xin chào, Sĩ tử 👋"></label>
+          <label class="ws-field"><span>Phụ đề</span><input id="ws-greeting-sub" class="form-input-control" type="text" maxlength="80" placeholder="Ví dụ: Hôm nay bạn muốn chinh phục mục tiêu nào?"></label>
+        </div>
+
+        <!-- Hero -->
+        <div class="widget-setting-group">
+          <div class="widget-setting-title">Thẻ đếm ngược lớn</div>
+          <label class="ws-field ws-toggle"><input id="ws-hero-enabled" type="checkbox" aria-label="Hiển thị widget đếm ngược lớn"><span>Hiển thị widget</span></label>
+        </div>
+
+        <!-- Kỳ thi của bạn -->
+        <div class="widget-setting-group">
+          <div class="widget-setting-title">Bảng "Kỳ thi của bạn"</div>
+          <label class="ws-field ws-toggle"><input id="ws-exams-enabled" type="checkbox" aria-label="Hiển thị bảng Kỳ thi của bạn"><span>Hiển thị bảng</span></label>
+          <label class="ws-field"><span>Tiêu đề bảng</span><input id="ws-exams-title" class="form-input-control" type="text" maxlength="60" placeholder="Ví dụ: Kỳ thi trọng điểm"></label>
+        </div>
+
+        <!-- Lịch học -->
+        <div class="widget-setting-group">
+          <div class="widget-setting-title">Lịch học hôm nay</div>
+          <label class="ws-field ws-toggle"><input id="ws-schedule-enabled" type="checkbox" aria-label="Hiển thị Lịch học hôm nay"><span>Hiển thị lịch</span></label>
+        </div>
+
+        <div class="widget-settings-actions">
+          <button type="button" class="btn-ghost" id="btn-widget-reset"><i class="fa-solid fa-rotate-left"></i> Khôi phục mặc định</button>
+          <button type="button" class="btn-primary-action" id="btn-widget-save"><i class="fa-solid fa-check"></i> Lưu thay đổi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <!-- 1. Modal Thêm/Sửa Kỳ Thi -->
+  <div class="modal-backdrop" id="modal-exam">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-exam-title"><i class="fa-solid fa-calendar-plus"></i> Thêm Kỳ Thi Mới</h3>
+        <button class="btn-close-modal" data-close="modal-exam" aria-label="Đóng" title="Đóng">&times;</button>
+      </div>
+      <form id="form-exam">
+        <div class="modal-body-content">
+          <input type="hidden" id="exam-id">
+          <div class="form-group-item">
+            <label for="exam-name">Tên kỳ thi: <span style="color: var(--danger);">*</span></label>
+            <input type="text" id="exam-name" class="form-input-control" placeholder="Ví dụ: Thi HSA Đợt 1 - 2027" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group-item">
+              <label for="exam-category">Phân loại:</label>
+              <select id="exam-category" class="form-input-control">
+                <option value="thpt">THPT Quốc Gia</option>
+                <option value="hsa">ĐGNL HSA (ĐHQGHN)</option>
+                <option value="tsa">ĐGTD TSA (ĐH Bách Khoa)</option>
+                <option value="hsg">Học Sinh Giỏi</option>
+                <option value="school">Giữa Kỳ / Cuối Kỳ</option>
+                <option value="other">Kỳ thi khác</option>
+              </select>
+            </div>
+            <div class="form-group-item">
+              <label for="exam-priority">Ưu tiên:</label>
+<select id="exam-priority" class="form-input-control">
+                <option value="high">🔥 Trọng điểm</option>
+                <option value="medium" selected>⚡ Quan trọng</option>
+                <option value="low">📌 Bình thường</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group-item">
+              <label for="exam-date">Ngày thi: <span style="color: var(--danger);">*</span></label>
+              <input type="date" id="exam-date" class="form-input-control" required>
+            </div>
+            <div class="form-group-item">
+              <label for="exam-time">Giờ thi:</label>
+              <input type="time" id="exam-time" class="form-input-control" value="07:30">
+            </div>
+          </div>
+
+          <div class="form-group-item">
+            <label for="exam-notes">Ghi chú & Mục tiêu:</label>
+            <textarea id="exam-notes" class="form-input-control" rows="2" placeholder="Ví dụ: Mục tiêu 110/150 HSA hoặc 8.5+ THPTQG"></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer-actions">
+          <button type="button" class="btn-secondary-flat" data-close="modal-exam">Hủy</button>
+          <button type="submit" class="btn-primary-action"><i class="fa-solid fa-floppy-disk"></i> Lưu Kỳ Thi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal xác nhận (thay confirm() native — thân thiện di động) -->
+  <div class="modal-backdrop" id="modal-confirm">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="confirm-title"><i class="fa-solid fa-triangle-exclamation"></i> Xác nhận</h3>
+        <button class="btn-close-modal" id="btn-confirm-close" aria-label="Đóng" title="Đóng">&times;</button>
+      </div>
+      <div class="modal-body-content">
+        <p id="confirm-message" style="line-height: 1.5; margin: 0; white-space: pre-line;"></p>
+      </div>
+      <div class="modal-footer-actions">
+        <button type="button" class="btn-secondary-flat" id="btn-confirm-cancel">Hủy</button>
+        <button type="button" class="btn-primary-action" id="btn-confirm-ok">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Modal Quên Mật Khẩu -->
+  <div class="modal-backdrop" id="modal-forgot-password">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-key"></i> Khôi Phục Mật Khẩu</h3>
+        <button class="btn-close-modal" data-close="modal-forgot-password" aria-label="Đóng" title="Đóng">&times;</button>
+      </div>
+      <form id="form-forgot-password">
+        <div class="modal-body-content">
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">Nhập email của bạn để nhận liên kết đặt lại mật khẩu:</p>
+          <div class="form-group-item">
+            <label for="forgot-email">Địa chỉ Email:</label>
+            <input type="email" id="forgot-email" class="form-input-control" placeholder="name@example.com" required>
+          </div>
+        </div>
+        <div class="modal-footer-actions">
+          <button type="button" class="btn-secondary-flat" data-close="modal-forgot-password">Đóng</button>
+          <button type="submit" class="btn-primary-action" id="btn-submit-forgot">Gửi link đặt lại</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Modal Cập Nhật Hồ Sơ -->
+  <div class="modal-backdrop" id="modal-edit-profile">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-user-pen"></i> Chỉnh Sửa Hồ Sơ</h3>
+        <button class="btn-close-modal" data-close="modal-edit-profile" aria-label="Đóng" title="Đóng">&times;</button>
+      </div>
+      <form id="form-edit-profile">
+        <div class="modal-body-content">
+          <div class="form-group-item">
+            <label for="profile-display-name">Tên hiển thị:</label>
+            <input type="text" id="profile-display-name" class="form-input-control" placeholder="Ví dụ: Minh - 2k7 Thủ Khoa" required>
+          </div>
+          <div class="form-group-item">
+            <label for="profile-photo-url">Link ảnh đại diện (Tùy chọn):</label>
+            <input type="url" id="profile-photo-url" class="form-input-control" placeholder="https://example.com/avatar.jpg">
+          </div>
+        </div>
+        <div class="modal-footer-actions">
+          <button type="button" class="btn-secondary-flat" data-close="modal-edit-profile">Hủy</button>
+          <button type="submit" class="btn-primary-action" id="btn-submit-profile">Lưu thay đổi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. Modal Đổi Mật Khẩu -->
+  <div class="modal-backdrop" id="modal-change-password">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-key"></i> Đổi Mật Khẩu</h3>
+        <button class="btn-close-modal" data-close="modal-change-password" aria-label="Đóng" title="Đóng">&times;</button>
+      </div>
+      <form id="form-change-password">
+        <div class="modal-body-content">
+          <div class="form-group-item">
+            <label for="change-old-password">Mật khẩu hiện tại:</label>
+            <input type="password" id="change-old-password" class="form-input-control" required>
+          </div>
+          <div class="form-group-item">
+            <label for="change-new-password">Mật khẩu mới (Tối thiểu 6 ký tự):</label>
+            <input type="password" id="change-new-password" class="form-input-control" minlength="6" required>
+          </div>
+          <div class="form-group-item">
+            <label for="change-confirm-password">Xác nhận mật khẩu mới:</label>
+            <input type="password" id="change-confirm-password" class="form-input-control" minlength="6" required>
+          </div>
+        </div>
+        <div class="modal-footer-actions">
+          <button type="button" class="btn-secondary-flat" data-close="modal-change-password">Hủy</button>
+          <button type="submit" class="btn-primary-action" id="btn-submit-change-pwd">Cập nhật</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-document-viewer">
+    <div class="modal-card document-viewer-modal">
+      <div class="modal-header">
+        <h3 id="document-viewer-title"><i class="fa-solid fa-file"></i> Xem tài liệu</h3>
+        <button class="btn-close-modal" data-close="modal-document-viewer" aria-label="Đóng" title="Đóng">&times;</button>
+      </div>
+      <div class="document-viewer-content" id="document-viewer-content"></div>
+    </div>
+  </div>
+
+  <!-- CALL OVERLAY: gọi thoại / gọi video 1-1 -->
+  <div class="call-overlay" id="call-overlay" hidden>
+    <div class="call-media">
+      <video id="call-remote-video" class="call-remote-video" autoplay playsinline></video>
+      <video id="call-local-video" class="call-local-video" autoplay playsinline muted></video>
+    </div>
+    <div class="call-info" id="call-info">
+      <div class="call-avatar" id="call-avatar"></div>
+      <div class="call-avatar-type" id="call-avatar-icon"><i class="fa-solid fa-phone"></i></div>
+      <div class="call-name" id="call-name">Đang gọi…</div>
+      <div class="call-status" id="call-status">Đang gọi…</div>
+    </div>
+    <div class="call-actions" id="call-actions"></div>
+  </div>
+
+  <!-- ROOM OVERLAY: phòng ôn thi trực tiếp -->
+  <div class="call-overlay room-overlay" id="room-overlay" hidden>
+    <div class="room-header">
+      <div class="room-header-left">
+        <div class="room-kicker" id="room-kicker">PHÒNG THOẠI</div>
+        <div class="room-name" id="room-name">Phòng ôn thi trực tiếp</div>
+      </div>
+      <div class="room-timer" id="room-timer">00:00</div>
+    </div>
+    <div class="room-grid" id="room-grid"></div>
+    <div class="call-actions room-actions" id="room-actions"></div>
+  </div>
+
+<!-- MOBILE GLASSMORPHIC BOTTOM NAVIGATION (FIGMA SCREENSHOT 2) -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <button class="mobile-nav-btn active" data-tab="tab-home">
+      <i class="fa-solid fa-house"></i>
+      <span>Trang chủ</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="tab-exams">
+      <i class="fa-solid fa-bullseye"></i>
+      <span>Kỳ thi</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="tab-ai">
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+      <span>AI ôn thi</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="tab-chat">
+      <i class="fa-solid fa-users"></i>
+      <span>Cộng đồng</span>
+      <span class="nav-badge" id="chat-nav-badge">0</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="tab-groups">
+      <i class="fa-solid fa-people-group"></i>
+      <span>Học nhóm</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="tab-account">
+      <i class="fa-solid fa-user"></i>
+      <span>Tài khoản</span>
+    </button>
+  </nav>
+
+  <!-- Firebase Compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/ai-config.js?v=7"></script>
+  <script src="js/ai-rag.js?v=3"></script>
+  <script src="js/ai-web.js?v=1"></script>
+  <script src="js/ai-profile.js?v=1"></script>
+  <script src="js/push-config.js?v=2"></script>
+  <script src="js/push-client.js?v=3"></script>
+  <script src="js/app.js?v=103"></script>
+  <script src="js/study.js?v=5"></script>
+  <script src="js/calls.js?v=11"></script>
+  <script src="js/doc2pdf.js?v=1"></script>
+<script src="js/study-groups.js?v=14"></script>
+  <script src="js/pwa.js?v=13"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
