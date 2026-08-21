@@ -9,6 +9,5 @@ push-worker/vapid-private.txt
 session-*.md
 www/
 ios/App/Pods/
-ios/App/App/public/
 ios/App/output/
 ios/DerivedData/

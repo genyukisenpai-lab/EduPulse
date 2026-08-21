@@ -17,7 +17,7 @@ for (const f of files) {
 for (const d of dirs) {
   const src = path.join(root, d);
   if (!fs.existsSync(src)) continue;
-  fs.cpSync(src, path.join(www, d), { recursive: true });
+  fs.cpSync(src, path.join(www, d), { recursive: true, filter: (p) => !p.endsWith('ai-config.js') });
 }
 
 console.log('www/ built:', fs.readdirSync(www).join(', '));

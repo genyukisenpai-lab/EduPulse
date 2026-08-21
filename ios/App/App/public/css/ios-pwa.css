@@ -1,0 +1,1401 @@
+/* ==========================================================================
+   EDUPULSE iOS PWA — Native-feel mobile layer
+   Tải sau css/style.css; chỉ áp dụng cho mobile (≤900px), desktop giữ nguyên.
+   Yêu cầu tương thích: luôn có fallback 100vh trước dvh, -webkit-backdrop-filter,
+   không dùng :has()/aspect-ratio/svhh — an toàn trên iOS 14 trở lên.
+   ========================================================================== */
+
+/* ---------- 1. SYSTEM FONT (SF Pro trên iOS, giảm tải font tùy chỉnh) ---------- */
+@media (max-width: 900px) {
+  :root {
+    --font-heading: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, 'Noto Sans Math', 'Cambria Math', 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'Apple Symbols', 'DejaVu Sans', 'Arial Unicode MS', Arial, sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Segoe UI', Roboto, 'Noto Sans Math', 'STIX Two Math', 'Cambria Math', 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'Apple Symbols', 'DejaVu Sans', 'Arial Unicode MS', Arial, sans-serif;
+  }
+}
+
+/* ---------- 2. iOS GROUPED BACKGROUND (nền xám hệ thống) ---------- */
+@media (max-width: 900px) {
+  body { background-color: #f2f2f7; }
+  body[data-theme="dark"] { background-color: #000000; }
+}
+
+/* ---------- 2b. iOS SEMANTIC DARK MODE TOKENS ---------- */
+@media (max-width: 900px) {
+  body[data-theme="dark"] {
+    --ios-grouped-bg: #1c1c1e;
+    --ios-secondary-bg: #2c2c2e;
+    --ios-tertiary-bg: #3a3a3c;
+    --ios-separator: rgba(84, 84, 88, 0.65);
+    --ios-separator-opaque: #38383a;
+  }
+}
+
+/* ---------- 2c. iOS HIG TYPOGRAPHY UTILITIES ---------- */
+@media (max-width: 900px) {
+  .ios-large-title {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 0.37px;
+    line-height: 1.18;
+    color: var(--text-main);
+  }
+
+  .ios-title-1 { font-size: 28px; font-weight: 700; letter-spacing: 0.36px; }
+  .ios-title-2 { font-size: 22px; font-weight: 700; letter-spacing: 0.35px; }
+  .ios-title-3 { font-size: 20px; font-weight: 600; letter-spacing: 0.38px; }
+  .ios-headline { font-size: 17px; font-weight: 600; letter-spacing: -0.41px; }
+  .ios-body { font-size: 17px; font-weight: 400; letter-spacing: -0.41px; }
+  .ios-callout { font-size: 16px; font-weight: 400; letter-spacing: -0.32px; }
+  .ios-subhead { font-size: 15px; font-weight: 400; letter-spacing: -0.24px; }
+  .ios-footnote { font-size: 13px; font-weight: 400; letter-spacing: -0.08px; color: var(--text-muted); }
+  .ios-caption { font-size: 12px; font-weight: 400; letter-spacing: 0; color: var(--text-muted); }
+}
+
+/* ---------- 2d. iOS GROUPED LIST PATTERN (Settings style) ---------- */
+@media (max-width: 900px) {
+  .ios-grouped-list {
+    background: var(--bg-card, #ffffff);
+    border-radius: 12px;
+    margin: 0 20px 24px;
+    overflow: hidden;
+  }
+
+  body[data-theme="dark"] .ios-grouped-list {
+    background: var(--ios-grouped-bg, #1c1c1e);
+  }
+
+  .ios-grouped-list-header,
+  .ios-grouped-list-footer {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-muted);
+    padding: 6px 20px 6px 36px;
+  }
+
+  .ios-grouped-list-footer { padding-top: 0; padding-bottom: 8px; }
+
+  .ios-grouped-item {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 11px 16px 11px 20px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .ios-grouped-item + .ios-grouped-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 54px;
+    right: 0;
+    height: 0.5px;
+    background: var(--ios-separator, rgba(60, 60, 67, 0.29));
+  }
+
+  body[data-theme="dark"] .ios-grouped-item + .ios-grouped-item::before {
+    background: var(--ios-separator, rgba(84, 84, 88, 0.65));
+  }
+
+  .ios-grouped-item-icon {
+    width: 29px;
+    height: 29px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    color: #ffffff;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .ios-grouped-item-label {
+    flex: 1;
+    font-size: 17px;
+    color: var(--text-main);
+  }
+
+  .ios-grouped-item-value {
+    font-size: 17px;
+    color: var(--text-muted);
+    margin-left: 8px;
+  }
+
+  .ios-grouped-item-chevron {
+    color: #c7c7cc;
+    font-size: 14px;
+    margin-left: 8px;
+  }
+
+  body[data-theme="dark"] .ios-grouped-item-chevron {
+    color: #636366;
+  }
+
+  .ios-grouped-item:active {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  body[data-theme="dark"] .ios-grouped-item:active {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* ---------- 3. MOBILE HEADER — removed, bottom tab bar only ---------- */
+
+/* ---------- 4. TAB BAR — native iOS full-width tab bar (5 tab) ---------- */
+@media (max-width: 900px) {
+  .mobile-bottom-nav {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 4px 0 calc(8px + env(safe-area-inset-bottom));
+    height: auto;
+    border: none;
+    border-top: 0.5px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0;
+    background: rgba(249, 249, 249, 0.94);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: none;
+  }
+
+  body[data-theme="dark"] .mobile-bottom-nav {
+    background: rgba(29, 29, 31, 0.94);
+    border-top-color: rgba(84, 84, 88, 0.65);
+    box-shadow: none;
+  }
+
+  .mobile-nav-btn {
+    position: relative;
+    gap: 2px;
+    padding: 4px 0;
+    min-height: 44px;
+  }
+
+  .mobile-nav-btn i {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    transition: color 0.15s ease;
+  }
+
+  .mobile-nav-btn.active i {
+    background: none;
+    color: var(--primary);
+    transform: none;
+  }
+
+  .mobile-nav-btn.active {
+    color: var(--primary);
+    font-weight: 500;
+  }
+
+  .mobile-nav-btn span {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.07px;
+  }
+
+  .mobile-nav-btn .nav-badge {
+    position: absolute;
+    top: 0;
+    right: calc(50% - 26px);
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: #ff3b30;
+    color: #ffffff;
+    font-size: 0.6rem;
+    font-weight: 700;
+    line-height: 16px;
+    text-align: center;
+  }
+}
+
+/* ---------- 4b. ACCOUNT ACTIONS → iOS Grouped List ---------- */
+@media (max-width: 900px) {
+  .account-group-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: var(--bg-card, #ffffff);
+    border-radius: 12px;
+    border: none;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  }
+
+  .account-group {
+    margin-bottom: 18px;
+  }
+
+  .account-group-title {
+    margin-left: 16px;
+    margin-bottom: 6px;
+  }
+
+  .account-group-note {
+    margin-left: 18px;
+    margin-right: 12px;
+  }
+
+  .account-group-list .account-action-row-btn {
+    border-radius: 0;
+    background: transparent;
+    border: none;
+    border-bottom: 0.5px solid var(--ios-separator, rgba(60, 60, 67, 0.29));
+    padding: 8px 14px 8px 16px;
+  }
+
+  .account-action-row-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 40px;
+    padding: 8px 14px 8px 16px;
+    border-radius: 0;
+    background: transparent;
+    border: none;
+    border-bottom: 0.5px solid var(--ios-separator, rgba(60, 60, 67, 0.29));
+    color: var(--text-main);
+    font-weight: 400;
+    font-size: 15px;
+    cursor: pointer;
+    transition: none;
+    position: relative;
+  }
+
+  body[data-theme="dark"] .account-action-row-btn {
+    border-bottom-color: var(--ios-separator, rgba(84, 84, 88, 0.65));
+  }
+
+  .account-action-row-btn:last-child {
+    border-bottom: none;
+  }
+
+  .account-action-row-btn span:first-child {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    font-size: 17px;
+  }
+
+  .account-row-sub {
+    flex-basis: 100%;
+    font-size: 0.82rem;
+    margin-top: 2px;
+    margin-left: 1.6rem;
+  }
+
+  .account-action-row-btn span:first-child i {
+    margin-right: 12px;
+    font-size: 1.1rem;
+    color: var(--primary);
+  }
+
+  .account-group-list .account-action-row-btn.danger span:first-child i {
+    color: #ff3b30;
+  }
+
+  .account-action-row-btn:active {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  body[data-theme="dark"] .account-action-row-btn:active {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .account-action-row-btn .fa-chevron-right {
+    color: #c7c7cc;
+    font-size: 14px;
+  }
+
+  body[data-theme="dark"] .account-action-row-btn .fa-chevron-right {
+    color: #636366;
+  }
+
+  .account-action-row-btn.danger {
+    color: #ff3b30;
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .account-group-list .account-action-row-btn.danger {
+    border-bottom: 0.5px solid var(--ios-separator, rgba(60, 60, 67, 0.29));
+    color: #ff3b30;
+  }
+
+  .account-group-list .account-action-row-btn.danger:last-child {
+    border-bottom: none;
+  }
+}
+
+/* ---------- 5. SHEET MODAL — trượt lên từ dưới, bo góc trên, tay cầm ---------- */
+@media (max-width: 900px) {
+  .modal-backdrop {
+    padding: 0;
+    align-items: flex-end;
+    height: 100vh;
+    height: var(--ios-vv-height, 100vh);
+    overflow: hidden;
+    z-index: 10001;
+  }
+
+  #modal-widget-settings .modal-card { max-width: 100%; }
+
+  .modal-backdrop .modal-card {
+    width: 100%;
+    max-width: 100%;
+    max-height: 92vh;
+    max-height: 92dvh;
+    border-radius: 22px 22px 0 0;
+    animation: none;
+    transform: translateY(100%);
+    transition: transform 0.32s cubic-bezier(0.32, 0.72, 0.38, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-backdrop.active .modal-card { transform: translateY(0); }
+
+  .modal-backdrop .modal-card::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 5px;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.14);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  body[data-theme="dark"] .modal-card::before { background: rgba(255, 255, 255, 0.2); }
+
+  .modal-backdrop .modal-card > form {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .modal-backdrop .modal-body-content {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .document-viewer-modal {
+    height: 82vh;
+    height: 82dvh;
+    border-radius: 22px 22px 0 0;
+  }
+
+  .document-viewer-frame { min-height: 0; }
+}
+
+/* ---------- 6. HERO COUNTDOWN — phẳng, tông nhạt ---------- */
+@media (max-width: 900px) {
+  .hero-countdown-card {
+    background: var(--primary-light);
+    box-shadow: none;
+    border-radius: 16px;
+    padding: 14px 14px;
+  }
+
+  .hero-countdown-card::before { display: none; }
+
+  .hero-kicker { color: var(--primary); font-size: 0.65rem; }
+  .hero-exam-title { color: var(--text-main); font-size: 1.1rem; }
+  .hero-exam-meta { color: var(--text-muted); font-size: 0.8rem; }
+  .timer-unit-num { color: var(--primary); font-size: 1.6rem; }
+  .timer-unit-lbl { color: var(--text-muted); font-size: 0.55rem; }
+
+  body[data-theme="dark"] .hero-countdown-card { background: rgba(90, 89, 237, 0.16); }
+  body[data-theme="dark"] .hero-kicker,
+  body[data-theme="dark"] .timer-unit-num { color: #818cf8; }
+  body[data-theme="dark"] .hero-exam-title { color: #f1f5f9; }
+
+  .btn-hero-detail { background: var(--primary); padding: 8px 16px; font-size: 0.82rem; }
+}
+
+/* ---------- 6b. HERO TIMER — ẩn GIÂY trên màn hình nhỏ ---------- */
+@media (max-width: 500px) {
+  .timer-unit-item:last-child {
+    display: none;
+  }
+
+  .hero-timer-display {
+    gap: 12px;
+  }
+}
+
+/* ---------- 6c. STAT CARDS — gọn hơn trên mobile ---------- */
+@media (max-width: 500px) {
+  .stat-box-sub {
+    display: none;
+  }
+
+  .stat-box-card {
+    padding: 12px 10px;
+  }
+
+  .stat-box-value {
+    font-size: 1.35rem;
+  }
+}
+
+/* ---------- 7. BỀ MẶT GROUPED LIST — card phẳng, gom nhóm ---------- */
+@media (max-width: 900px) {
+  .stat-box-card,
+  .dashboard-panel-card,
+  .chat-page-shell {
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  }
+
+  /* Account: card ngoài trong suốt, để các group tự nổi (iOS Settings style) */
+  .account-card-main {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  #account-guest-view {
+    background: var(--bg-card, #ffffff);
+    border-radius: 14px;
+    padding: 16px 14px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  }
+
+  .stat-box-card { position: relative; }
+
+  .account-streak-card {
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.28);
+    margin-bottom: 12px;
+  }
+
+  .account-streak-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+  }
+
+  .account-streak-value {
+    font-size: 1.7rem;
+  }
+
+  .account-countdown-card {
+    border: none;
+    border-radius: 16px;
+    padding: 18px 18px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  }
+
+  .acc-timer-unit {
+    padding: 10px 4px;
+  }
+
+  .acc-timer-num {
+    font-size: 1.3rem;
+  }
+
+  .exam-mini-item,
+  .community-widget-item {
+    background: var(--bg-body);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+
+  .panel-title { font-size: 0.95rem; }
+  .stat-box-value { font-size: 1.3rem; }
+  .ai-workspace {
+    border: none;
+    box-shadow: none;
+  }
+}
+
+/* ---------- 8. SKELETON LOADING (chỉ hiện khi JS đang chạy) ---------- */
+.skeleton { display: none; }
+
+body.js-running .skeleton {
+  display: block;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(100, 116, 139, 0.16);
+  overflow: hidden;
+  z-index: 2;
+}
+
+body.js-running .skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  animation: skeletonShimmer 1.3s infinite;
+}
+
+body[data-theme="dark"].js-running .skeleton { background: rgba(148, 163, 184, 0.12); }
+
+body.js-running .hero-skeleton { background: #e2e8f0; }
+body[data-theme="dark"].js-running .hero-skeleton { background: #1a1d27; }
+
+body.js-running .mini-skeleton,
+body.js-running .exam-card-skeleton,
+body.js-running .library-skeleton {
+  position: static;
+  height: 64px;
+  border-radius: 12px;
+}
+
+body.js-running .exam-card-skeleton { height: 170px; border-radius: 16px; }
+body.js-running .library-skeleton { height: 76px; border-radius: 16px; }
+
+@keyframes skeletonShimmer { 100% { transform: translateX(100%); } }
+
+/* ---------- 9. CHUYỂN ĐỘNG MƯỢT + press feedback ---------- */
+@media (max-width: 900px) {
+  .tab-content.active {
+    animation: fadeSlideTab 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mobile-nav-btn:active i { transform: scale(0.88); }
+
+  .stat-box-card,
+  .exam-mini-item,
+  .community-widget-item,
+  .dashboard-panel-card,
+  .library-card,
+  .account-action-row-btn,
+  .mobile-theme-btn,
+  .btn-pill-add,
+  .filter-pill-btn,
+  .btn-primary-action,
+  .btn-secondary-flat,
+  .btn-hero-detail,
+  .ios-grouped-item {
+    transition: transform 0.1s ease, background-color 0.1s ease;
+  }
+
+  .stat-box-card:active,
+  .exam-mini-item:active,
+  .community-widget-item:active,
+  .dashboard-panel-card:active,
+  .library-card:active,
+  .account-action-row-btn:active,
+  .mobile-theme-btn:active,
+  .btn-pill-add:active,
+  .filter-pill-btn:active,
+  .btn-primary-action:active,
+  .btn-secondary-flat:active,
+  .btn-hero-detail:active,
+  .ios-grouped-item:active {
+    transform: scale(0.975);
+  }
+}
+
+@keyframes fadeSlideTab {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Số đếm giờ/phút/giây: pop nhẹ mỗi khi đổi (app.js thêm class .tick) */
+.timer-unit-num.tick { animation: tickPop 0.32s ease; }
+
+@keyframes tickPop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+/* ---------- 10. TIỆN ÍCH iOS CHROME ---------- */
+* { -webkit-tap-highlight-color: transparent; }
+
+@media (max-width: 900px) {
+  button,
+  .mobile-nav-btn,
+  .account-action-row-btn,
+  .filter-pill-btn,
+  .exam-mini-item,
+  .community-widget-item,
+  .library-card,
+  .mobile-user-avatar {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .app-toast {
+    bottom: calc(64px + env(safe-area-inset-bottom));
+    left: 12px;
+    right: 12px;
+    text-align: center;
+    border-radius: 12px;
+  }
+
+  .pwa-install-prompt,
+  .ios-install-hint {
+    bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ---------- 11. PWA STANDALONE (iOS: status bar + safe-area) ---------- */
+@media (display-mode: standalone) {
+  /* Kệ tối dưới status bar (black-translucent → chữ trắng luôn đọc được) */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: env(safe-area-inset-top);
+    background: #0b0f19;
+    z-index: 9998;
+    pointer-events: none;
+  }
+
+  .app-main-viewport {
+    padding-top: 0;
+    padding-bottom: calc(60px + env(safe-area-inset-bottom));
+  }
+
+  .app-toast {
+    bottom: calc(68px + env(safe-area-inset-bottom));
+  }
+
+  .pwa-install-prompt,
+  .ios-install-hint {
+    bottom: calc(68px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ---------- 11b. LANDSCAPE — ẩn status bar overlay ---------- */
+@media (max-width: 900px) and (orientation: landscape) {
+  body::before { height: 0; }
+  .mobile-app-header { top: 0; }
+}
+
+/* ---------- 12. TÔN TRỌNG prefers-reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   13. iOS MINIMAL OVERRIDES — tối giản tối đa (phẳng, inset-grouped)
+   Chỉ áp dụng mobile ≤900px; desktop giữ nguyên.
+   Nguyên tắc: bỏ hết gradient/đổ bóng/viền dày → card trắng radius 12px
+   + rãnh 0.5px; indigo chỉ cho tab active / nút chính / số ngày.
+   ========================================================================== */
+@media (max-width: 900px) {
+  /* --- 13.0 Nội dung: ẩn tab Tài liệu khỏi bottom nav (giữ trong DOM/desktop) --- */
+  .mobile-bottom-nav .mobile-nav-btn[data-tab="tab-library"] {
+    display: none;
+  }
+
+  /* --- 13.1 Content khung — thoáng, sát cạnh, chừa chỗ cho tab bar --- */
+  .app-main-viewport {
+    padding: 12px 16px calc(64px + env(safe-area-inset-bottom));
+  }
+
+  /* --- 13.2 Phẳng toàn cục: xóa bóng/viền dày của mọi khối --- */
+  .hero-countdown-card,
+  .account-streak-card,
+  .account-countdown-card,
+  .exam-full-card,
+  .stat-box-card,
+  .dashboard-panel-card,
+  .chat-page-shell,
+  .ai-workspace,
+  .exam-mini-item,
+  .community-widget-item,
+  .library-card,
+  #account-guest-view {
+    box-shadow: none;
+  }
+
+  /* ================= TRANG CHỦ ================= */
+  .hero-countdown-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 18px 18px;
+    gap: 14px;
+  }
+  body[data-theme="dark"] .hero-countdown-card { background: var(--bg-card); }
+
+  .hero-kicker {
+    color: var(--primary);
+    font-size: 0.68rem;
+    letter-spacing: 0.8px;
+    margin-bottom: 4px;
+  }
+  body[data-theme="dark"] .hero-kicker { color: var(--primary); }
+
+  .hero-exam-title {
+    color: var(--text-main);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .hero-exam-meta { color: var(--text-muted); font-size: 0.78rem; }
+
+  .hero-timer-display { gap: 16px; }
+
+  .timer-unit-num {
+    color: var(--text-main);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    font-variant-numeric: tabular-nums;
+  }
+  body[data-theme="dark"] .timer-unit-num { color: var(--text-main); }
+
+  .timer-unit-lbl { color: var(--text-muted); font-size: 0.6rem; }
+
+  #btn-hero-detail { display: none; }
+
+  /* Streak → row grouped phẳng */
+  .account-streak-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 13px 16px;
+    margin-bottom: 12px;
+    color: var(--text-main);
+    gap: 14px;
+  }
+  body[data-theme="dark"] .account-streak-card { background: var(--bg-card); }
+
+  .account-streak-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 9px;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 1.1rem;
+  }
+  body[data-theme="dark"] .account-streak-icon {
+    background: var(--primary-light);
+    color: var(--primary);
+  }
+
+  .account-streak-value { font-size: 1.4rem; font-weight: 700; color: var(--text-main); }
+  .account-streak-label { font-size: 0.8rem; color: var(--text-muted); opacity: 1; font-weight: 500; }
+  .account-streak-sub { font-size: 0.72rem; color: var(--text-dim); opacity: 1; }
+
+  /* ================= KỲ THI ================= */
+  .greeting-sub { display: none; }
+
+  .exams-full-page .greeting-title { font-size: 1.4rem; }
+
+  /* Bộ lọc → segmented control phẳng */
+  .filter-pills-group {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+  }
+  .filter-pills-group::-webkit-scrollbar { display: none; }
+
+  .filter-pill-btn {
+    background: transparent;
+    border: none;
+    border-radius: 9px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 8px 14px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .filter-pill-btn:hover {
+    border-color: transparent;
+    color: var(--text-main);
+  }
+  .filter-pill-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  /* Thẻ kỳ thi → row grouped */
+  .exams-cards-grid { gap: 10px; }
+
+  .exam-full-card {
+    background: var(--bg-card);
+    border: none;
+    border-radius: 12px;
+    padding: 15px 18px;
+  }
+  body[data-theme="dark"] .exam-full-card { background: var(--bg-card); }
+
+  .exam-category-tag {
+    background: transparent;
+    color: var(--primary);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .exam-card-name { font-size: 1.05rem; }
+  .exam-card-notes { display: none; }
+  .exam-card-bottom { border-top: none; padding-top: 8px; }
+  .exam-days-left { color: var(--primary); }
+
+  /* ================= TRỢ LÝ AI ================= */
+  .ai-workspace {
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  /* ================= CỘNG ĐỒNG ================= */
+  .chat-page-shell {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+  }
+  body[data-theme="dark"] .chat-page-shell { background: transparent; }
+
+  .chat-main-panel { background: transparent; }
+  .chat-header-bar {
+    background: transparent;
+    border-bottom: 0.5px solid var(--ios-separator, rgba(60, 60, 67, 0.29));
+    padding: 8px 14px;
+  }
+  #chat-connection { font-size: 0.7rem; }
+
+  /* ================= TÀI KHOẢN ================= */
+  .account-countdown-card {
+    background: var(--bg-card);
+    border: none;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  body[data-theme="dark"] .account-countdown-card { background: var(--bg-card); }
+
+  .acc-timer-num { font-size: 1.1rem; color: var(--text-main); }
+}
+
+/* ==========================================================================
+   14. LOCKED UI — khóa tương tác (zoom/overscroll) + chrome cố định
+   Chống rubber-band, giữ header/bottom nav cố định, nội dung cuộn riêng.
+   ========================================================================== */
+
+/* --- 14.0 Chống overscroll/rubber-band ở cấp trang --- */
+html.ui-locked,
+html.ui-locked body {
+  overscroll-behavior: none;
+}
+
+@media (max-width: 900px) {
+  .app-main-viewport,
+  .tab-content.active,
+  .chat-messages-container,
+  .ai-chat,
+  .modal-body-content {
+    overscroll-behavior-y: contain;
+  }
+
+  .tab-content.active {
+    overflow-x: hidden;
+    scroll-padding-top: 56px;
+    touch-action: pan-y;
+  }
+
+  .app-main-viewport {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  /* --- 14.2 Ẩn scrollbar — mỗi tab như 1 màn hình cố định (native feel) --- */
+  .tab-content.active,
+  .chat-messages-container,
+  .ai-chat,
+  .modal-body-content,
+  .document-viewer-content,
+  .stats-log-list {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  /* Bộ lọc kỳ thi: bọc xuống dòng, KHÔNG cuộn ngang */
+  .filter-pills-group {
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .tab-content.active::-webkit-scrollbar,
+  .chat-messages-container::-webkit-scrollbar,
+  .ai-chat::-webkit-scrollbar,
+  .modal-body-content::-webkit-scrollbar,
+  .document-viewer-content::-webkit-scrollbar,
+  .stats-log-list::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  /* --- 14.1 Header cố định mỗi tab (chrome giữ vị trí, nội dung cuộn bên dưới) --- */
+  .mobile-app-header,
+  .exams-full-page .filter-bar-header,
+  .ai-page .home-greeting-row,
+  .groups-page .groups-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    padding: 10px 16px;
+    background: rgba(249, 249, 249, 0.92);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+  }
+
+  body[data-theme="dark"] .mobile-app-header,
+  body[data-theme="dark"] .exams-full-page .filter-bar-header,
+  body[data-theme="dark"] .ai-page .home-greeting-row,
+  body[data-theme="dark"] .groups-page .groups-header {
+    background: rgba(0, 0, 0, 0.88);
+    border-bottom-color: rgba(84, 84, 88, 0.65);
+  }
+
+  .ai-page .home-greeting-row { margin-bottom: 0; }
+  .groups-page .groups-header { margin-bottom: 12px; }
+  .groups-page .groups-header .greeting-title i { font-size: 0.8em; }
+
+  .exams-full-page .filter-bar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  /* --- 14.3 Standalone (PWA cài): header dừng dưới kệ status bar,
+     layout khóa đúng 1 màn hình (không bao giờ tràn ra ngoài khung) --- */
+  @media (display-mode: standalone) {
+    .mobile-app-header,
+    .exams-full-page .filter-bar-header,
+    .ai-page .home-greeting-row,
+    .groups-page .groups-header {
+      top: env(safe-area-inset-top);
+    }
+
+    .app-layout {
+      height: 100vh;
+      height: 100dvh;
+      max-height: 100dvh;
+      overflow: hidden;
+    }
+
+    .app-main-viewport {
+      height: 100vh;
+      height: 100dvh;
+      max-height: 100dvh;
+    }
+
+    .tab-content.active {
+      max-height: 100%;
+    }
+  }
+}
+
+/* ==========================================================================
+   15. EXAMS — IOS GROUPED LIST REDESIGN (mobile)
+   Nhóm "Sắp diễn ra" / "Đã kết thúc"; mỗi kỳ thi là 1 row trong khối
+   bo tròn (inset grouped), ngăn cách bằng separator mảnh như iOS Settings.
+   ========================================================================== */
+@media (max-width: 900px) {
+  .exams-cards-grid { display: block; gap: 0; }
+  .exams-full-page { gap: 10px; }
+
+  .exam-list-section { margin-bottom: 16px; }
+
+  .exam-list-section-head {
+    padding: 4px 6px 8px;
+    font-size: 13px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .exam-list { display: block; gap: 0; }
+
+  .exam-full-card {
+    background: var(--bg-card, #ffffff);
+    border: none;
+    border-radius: 0;
+  }
+
+  body[data-theme="dark"] .exam-full-card {
+    background: var(--ios-grouped-bg, #1c1c1e);
+  }
+
+  /* Khối bo tròn: row đầu cong trên, row cuối cong dưới */
+  .exam-list-section .exam-list .exam-full-card:first-child { border-radius: 12px 12px 0 0; }
+  .exam-list-section .exam-list .exam-full-card:last-child { border-radius: 0 0 12px 12px; }
+  .exam-list-section .exam-list .exam-full-card:only-child { border-radius: 12px; }
+
+  .exam-list-section .exam-list .exam-full-card + .exam-full-card {
+    border-top: 0.5px solid rgba(60, 60, 67, 0.29);
+  }
+
+  body[data-theme="dark"] .exam-list-section .exam-list .exam-full-card + .exam-full-card {
+    border-top-color: var(--ios-separator, rgba(84, 84, 88, 0.65));
+  }
+
+  .exam-row-main {
+    gap: 12px;
+    padding: 14px;
+    align-items: center;
+  }
+
+  .exam-date-chip {
+    min-width: 46px;
+    height: 50px;
+    border-radius: 10px;
+  }
+
+  .exam-date-day { font-size: 1.2rem; }
+  .exam-date-month { font-size: 0.6rem; }
+
+  .exam-card-name { font-size: 1rem; }
+  .exam-row-sub { font-size: 0.78rem; }
+  .exam-row-status { margin-top: 5px; }
+
+  .exam-row-chevron { font-size: 0.8rem; }
+
+  .exam-row-actions {
+    padding: 4px 8px;
+    border-top: 0.5px solid rgba(60, 60, 67, 0.12);
+  }
+
+  body[data-theme="dark"] .exam-row-actions {
+    border-top-color: var(--ios-separator, rgba(84, 84, 88, 0.65));
+  }
+
+  .exam-action { width: 44px; height: 44px; }
+}
+
+/* ==========================================================================
+   16. MINIMAL V2 — MOBILE (bỏ nốt bóng/viền còn sót, phẳng tuyệt đối)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .stat-box-card,
+  .dashboard-panel-card,
+  .chat-page-shell,
+  #account-guest-view,
+  .account-countdown-card,
+  .account-group-list,
+  .exam-mini-item,
+  .community-widget-item,
+  .account-streak-card,
+  .mobile-bottom-nav,
+  .ai-workspace {
+    box-shadow: none;
+  }
+
+  .account-streak-card { box-shadow: none; }
+
+  .account-group-list { background: var(--bg-card); border-radius: 12px; }
+
+  /* Tab bar: chữ đều, active indigo đúng mức, không hiệu ứng thừa */
+  .mobile-nav-btn span { font-weight: 500; letter-spacing: 0.1px; }
+
+  /* Home không lời chào: header là thanh công cụ gọn */
+  .mobile-app-header { justify-content: flex-end; min-height: 40px; padding: 8px 12px; margin-bottom: 8px; }
+
+  /* Home: panel kỳ thi gọn hơn */
+  #home-exams-panel { padding: 14px 14px 16px; }
+  #home-exams-panel .btn-pill-add { padding: 4px 10px; }
+  .exam-mini-item { padding: 8px 12px; }
+  .exam-mini-badge { font-size: 0.7rem; padding: 2px 7px; }
+
+  /* Exams tab: gọn hơn nữa trên màn hình nhỏ */
+  .exams-full-page { gap: 8px; }
+  .exam-list-section-head { padding: 0 6px 6px; font-size: 12px; }
+  .exam-row-main { padding: 10px 12px; gap: 10px; }
+  .exam-date-chip { min-width: 40px; height: 44px; border-radius: 9px; }
+  .exam-date-day { font-size: 1.05rem; }
+  .exam-card-name { font-size: 0.92rem; }
+  .exam-row-sub { font-size: 0.75rem; }
+  .exam-row-status { margin-top: 4px; }
+  .exam-action { width: 40px; height: 40px; }
+  .exam-row-chevron { font-size: 0.72rem; }
+}
+
+/* ==========================================================================
+   17. EXAMS CREATE + FILTER — COMPACT (mobile)
+   Modal tạo kỳ thi & bộ lọc phân loại gọn: form sát, chips nhỏ, header tiết kiệm.
+   ========================================================================== */
+@media (max-width: 900px) {
+  /* Filter bar gọn */
+  .exams-full-page .filter-bar-header {
+    padding: 8px 12px;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .exams-full-page .greeting-title { font-size: 1.1rem; }
+
+  .filter-pills-group {
+    padding: 3px;
+    gap: 3px;
+    border-radius: 10px;
+  }
+
+  .filter-pill-btn {
+    font-size: 0.74rem;
+    padding: 6px 11px;
+  }
+
+  .exam-toolbar-actions { gap: 6px; }
+
+  .exams-full-page .btn-primary-action,
+  .exams-full-page #btn-add-exam-page {
+    padding: 7px 12px;
+    font-size: 0.78rem;
+  }
+
+  /* Modal tạo kỳ thi gọn */
+  #modal-exam .modal-header { padding: 14px 16px; }
+  #modal-exam .modal-header h3 { font-size: 1.05rem; }
+  #modal-exam .modal-body-content { padding: 14px 16px; }
+
+  #modal-exam .form-group-item { margin-bottom: 10px; }
+
+  #modal-exam .form-group-item label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  #modal-exam .form-input-control {
+    padding: 9px 12px;
+    font-size: 0.88rem;
+    border-radius: 10px;
+  }
+
+  #modal-exam [style*="grid-template-columns"] { gap: 8px; }
+
+  #modal-exam .modal-footer-actions { padding: 10px 14px; }
+
+  #modal-exam .modal-footer-actions .btn-primary-action,
+  #modal-exam .modal-footer-actions .btn-secondary-flat {
+    min-height: 40px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ==========================================================================
+   18. AI + STUDY GROUPS — ĐỒNG BỘ UI APP (mobile)
+   Header large title, bong bóng chat đồng bộ tab Cộng đồng, composer nổi,
+   thẻ nhóm & section card cùng ngôn ngữ với các tab khác.
+   ========================================================================== */
+@media (max-width: 900px) {
+  /* --- AI: header large title như các tab khác --- */
+  .ai-page .greeting-title { font-size: 26px; }
+  .ai-page .greeting-sub { font-size: 0.82rem; margin-top: 1px; }
+  .ai-page .home-greeting-row { margin-bottom: 12px; }
+  .ai-page .ai-clear-history {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
+
+  /* --- AI: workspace + bong bóng chat --- */
+  .ai-workspace { padding: 14px 12px 12px; border-radius: var(--radius-lg); }
+  .ai-chat { padding: 2px 4px 10px; gap: 10px; }
+  .ai-message { max-width: 88%; }
+  .ai-message-avatar { width: 32px; height: 32px; font-size: 0.8rem; }
+  .ai-message-content { border-radius: 16px; border-top-left-radius: 4px; padding: 9px 13px; }
+  .ai-message.user .ai-message-content { border-radius: 16px; border-top-right-radius: 4px; }
+
+  /* --- AI: gợi ý + status --- */
+  .ai-weak-subjects { padding: 0 4px 8px; }
+  .ai-status-line { padding: 0 4px 8px; }
+
+  /* --- AI: composer nổi tròn cố định đáy --- */
+  .ai-composer {
+    position: sticky;
+    bottom: calc(env(safe-area-inset-bottom) + 8px);
+    margin: 4px 2px 2px;
+    padding: 6px 8px;
+    gap: 4px;
+    border-radius: 26px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 0.5px solid rgba(60, 60, 67, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+  }
+  body[data-theme="dark"] .ai-composer {
+    background: rgba(28, 28, 30, 0.92);
+    border-color: rgba(84, 84, 88, 0.6);
+  }
+  .ai-composer input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    font-size: 1rem;
+    padding: 10px 6px;
+  }
+  body[data-theme="dark"] .ai-composer input { background: transparent; border-color: transparent; }
+  .ai-composer input:focus { border: none; box-shadow: none; }
+  .ai-composer select.ai-model-select {
+    max-width: 96px;
+    border: none;
+    background: transparent;
+    font-size: 0.72rem;
+    padding: 4px 2px;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  body[data-theme="dark"] .ai-composer select.ai-model-select { background: transparent; border-color: transparent; }
+  .ai-composer button[type="submit"] {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .ai-composer button.ai-web-toggle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 1rem;
+    align-self: center;
+    opacity: 0.8;
+  }
+  .ai-composer button.ai-web-toggle.on { background: var(--primary); color: #fff; opacity: 1; }
+
+  /* --- Study Groups: header + actions --- */
+  .groups-page { padding: 0; max-width: 100%; min-width: 0; }
+  .groups-header { margin-bottom: 12px; }
+  .groups-header .greeting-title { font-size: 26px; }
+  .groups-header .greeting-sub { font-size: 0.82rem; }
+  .groups-actions { gap: 8px; margin-bottom: 10px; }
+  .groups-actions .btn-primary-action,
+  .groups-actions .btn-ghost-action {
+    flex: 1;
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  /* --- Study Groups: KHÓA MÀN HÌNH — chữ dài tự xuống dòng/thu nhỏ, không cắt --- */
+  .groups-header-detail .greeting-title {
+    font-size: 1.05rem;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+  .groups-header-detail .greeting-sub { font-size: 0.78rem; overflow-wrap: anywhere; }
+
+  /* Màn chi tiết: back pill + tiêu đề gọn để header sticky thấp */
+  .groups-header-detail { margin-bottom: 12px; }
+  .groups-header-detail .btn-back-pill {
+    font-size: 0.78rem;
+    padding: 6px 12px;
+    margin-bottom: 8px;
+  }
+  .groups-detail-title { gap: 10px; min-width: 0; }
+  .groups-detail-icon { width: 42px; height: 42px; font-size: 1.1rem; border-radius: 12px; }
+
+  /* Chống iOS auto-zoom khi focus input (font < 16px khiến cả trang phóng) */
+  .groups-form .form-input-control,
+  .groups-form input[type="file"].form-input-control,
+  .groups-form textarea.form-input-control,
+  .groups-form select.form-input-control {
+    font-size: 16px;
+  }
+
+  /* Hàng dữ liệu: chữ co nhỏ lại và tự xuống dòng, không cắt giữa chừng */
+  .group-member-name,
+  .group-file-name,
+  .group-assign-head b {
+    font-size: 0.85rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+  .group-file-meta,
+  .group-assign-meta,
+  .group-assign-progress {
+    font-size: 0.75rem;
+    overflow-wrap: anywhere;
+  }
+  .group-owner-badge { flex-shrink: 0; font-size: 0.62rem; }
+  .group-assign-head { font-size: 0.85rem; }
+  .group-assign-desc { font-size: 0.82rem; overflow-wrap: anywhere; }
+  .group-assign-att .btn-ghost-action {
+    max-width: 100%;
+    font-size: 0.8rem;
+    white-space: normal;
+    text-align: left;
+  }
+
+  /* --- Study Groups: form xếp chồng cho dễ nhập --- */
+  .groups-form { flex-direction: column; align-items: stretch; gap: 8px; }
+  .groups-form .form-input-control { flex: 1 1 auto; width: 100%; }
+  .groups-form .btn-primary-action { justify-content: center; min-height: 42px; }
+
+  /* --- Study Groups: section card đồng bộ stats-card --- */
+  .group-section { padding: 14px 12px; margin-bottom: 12px; border-radius: var(--radius-md); }
+  .group-section .stats-card-title { font-size: 0.95rem; margin-bottom: 10px; }
+
+  /* --- Study Groups: thẻ nhóm + hàng dữ liệu --- */
+  .group-card-open { padding: 13px 14px; padding-right: 56px; }
+  .group-card-icon { width: 38px; height: 38px; border-radius: 11px; font-size: 1rem; }
+  .group-card-chevron { display: none; }
+  .group-card-leave {
+    right: 6px;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  .group-member { padding: 11px 12px; gap: 10px; font-size: 0.92rem; }
+  .group-member-avatar { width: 32px; height: 32px; font-size: 0.8rem; }
+  .group-file { padding: 10px 12px; }
+  .group-file-icon { width: 36px; height: 36px; font-size: 0.95rem; }
+  .group-file.muted { justify-content: flex-start; }
+  .group-assign { padding: 12px 14px; border-radius: var(--radius-md); }
+}
