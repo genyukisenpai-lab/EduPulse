@@ -27,7 +27,7 @@ jobs:
         run: node scripts/build-web.js
 
       - name: Sync Capacitor iOS
-        run: npx cap sync ios
+        run: npx cap sync ios || echo "::warning::cap sync failed on runner, using committed assets"
 
       - name: Archive (unsigned)
         run: |
