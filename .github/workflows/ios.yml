@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: Install dependencies
+        run: npm ci
+
       - name: Build web assets
         run: node scripts/build-web.js
 
