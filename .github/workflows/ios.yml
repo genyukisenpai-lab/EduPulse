@@ -32,6 +32,7 @@ jobs:
       - name: Archive (unsigned)
         run: |
           set -o pipefail
+          mkdir -p build
           xcodebuild -project ios/App/App.xcodeproj \
             -scheme App \
             -configuration Release \
@@ -43,11 +44,11 @@ jobs:
         if: failure()
         run: |
           {
-            echo "### xcodebuild errors"
+            echo "### schemes"
+            xcodebuild -project ios/App/App.xcodeproj -list 2>&1 || true
+            echo "### log tail"
             echo '```'
-            grep -E "error:|Error:|FAILED:|xcodebuild: error" build/xcodebuild.log | tail -40 || true
-            echo "--- tail ---"
-            tail -25 build/xcodebuild.log || true
+            tail -60 build/xcodebuild.log 2>/dev/null || echo "(no log)"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
